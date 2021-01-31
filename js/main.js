@@ -9,14 +9,10 @@ const getRandomNumber = function(min, max) {
    
    console.log(getRandomNumber(0, 5)); 
 
-//    Функция для проверки максимальной длины строки. 
+// Функция для проверки максимальной длины строки. 
 // Тут не сложно, сама написала функцию 
 
-const isCommentTooLong = function(commentLength, maxLength) {
-    if(commentLength>maxLength) {
-        console.log(true)
-    } else {
-        console.log(false)
-    }
-}
-isCommentTooLong(150, 140);
+const maxLength = 140;
+const isCommentTooLong = function(commentLength) {(commentLength>maxLength) ? console.log(true):console.log(false)};
+
+isCommentTooLong(150); 
