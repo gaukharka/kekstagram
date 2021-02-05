@@ -11,8 +11,6 @@ const getRandomNumber = function(min, max) {
   throw new Error('Значение ' + min + ' не может быть больше, чем значение ' + max + '!')
 }
 
-getRandomNumber(0, 5);
-
 // Функция для проверки максимальной длины строки.
 // Тут не сложно, сама написала функцию
 
@@ -58,7 +56,8 @@ const LAST_NAME = [
   'Эванс',
 ]
 
-const MESSAGE = ['Всё отлично!',
+const MESSAGE = [
+  'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
@@ -75,24 +74,44 @@ const DESCRIPTION = [
   'Ой, какой безмятежный сон у котишки',
 ];
 
-const COUNT = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
-const MIN_AVATAR_NUMBER = 1;
-const MAX_AVATAR_NUMBER = 6;
 
-const avatarNumber = getRandomNumber(MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER);
-
-const getRandomArrayElement = (element) => {
-  return element[getRandomNumber(0, element.length-1)];
+const getRandomArrayElement = (array) => {
+  return array[getRandomNumber(0, array.length-1)];
 }
 
-// Создать массив ids из неповторяющихся чисел
+// Создать массив commentId из 6 неповторяющихся чисел
+const COMMENT_COUNT = 6;
+const commentId = [];
+
+while(commentId.length<COMMENT_COUNT) {
+  const id = getRandomNumber(0, COMMENT_COUNT);
+  if(commentId.indexOf(id) === -1){
+    commentId.push(id);
+  }
+}
+
+const comment = commentId.map(id => (
+  {
+    id: id,
+    avatar: `img/avatar-${id}.svg`,
+    message: MESSAGE[id],
+    name: `${getRandomArrayElement(FISRT_NAME)}` + ' ' + `${getRandomArrayElement(LAST_NAME)}`,
+  }),
+)
+
+const getRandomArrayComment = (comment) => {
+  return comment[getRandomNumber(1, comment.length-1)];
+}
+
+// Создать массив ids из 25 неповторяющихся чисел
+const COUNT = 25;
 const ids = [];
 
 while(ids.length<COUNT) {
   const id = getRandomNumber(1, COUNT);
-  if(ids.indexOf(id) == -1){
+  if(ids.indexOf(id) === -1){
     ids.push(id);
   }
 }
@@ -101,15 +120,9 @@ const result = ids.map(id => (
   {
     id: id,
     url: `photos/${id}.jpg`,
-    description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
-    comments: {
-      id: id,
-      avatar: `img/avatar-${avatarNumber}.svg`,
-      message: getRandomArrayElement(MESSAGE),
-      name: getRandomArrayElement(FISRT_NAME) + ' ' + getRandomArrayElement(LAST_NAME),
-    },
+    description: `${getRandomArrayElement(DESCRIPTION)}`,
+    likes: `${getRandomNumber(MIN_LIKES, MAX_LIKES)}`,
+    comments: getRandomArrayComment(comment),
   }),
 )
-
 console.log(result);
