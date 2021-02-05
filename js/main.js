@@ -11,18 +11,18 @@ const getRandomNumber = function(min, max) {
   throw new Error('Значение ' + min + ' не может быть больше, чем значение ' + max + '!')
 }
 
-// getRandomNumber(0, 5);
+getRandomNumber(0, 5);
 
 // Функция для проверки максимальной длины строки.
 // Тут не сложно, сама написала функцию
 
-// const isStringTooLong = function(stringToCheck, maxLength) {
-//   const stringToCheckLength = stringToCheck.length;
+const isStringTooLong = function(stringToCheck, maxLength) {
+  const stringToCheckLength = stringToCheck.length;
 
-//   return stringToCheckLength > maxLength;
-// };
+  return stringToCheckLength > maxLength;
+};
 
-// isStringTooLong('casjdajsdjajd ajdjasd asjdjasdjas asdahsdhd', 140);
+isStringTooLong('casjdajsdjajd ajdjasd asjdjasdjas asdahsdhd', 140);
 
 const FISRT_NAME = [
   'Айрат',
@@ -87,6 +87,7 @@ const getRandomArrayElement = (element) => {
   return element[getRandomNumber(0, element.length-1)];
 }
 
+// Создать массив ids из неповторяющихся чисел
 const ids = [];
 
 while(ids.length<COUNT) {
@@ -96,30 +97,19 @@ while(ids.length<COUNT) {
   }
 }
 
-console.log(ids[0]);
-
-const createDescription = () => {
-
-  return {
-    id: ids[0],
-    url: `photos/${ids[0]}.jpg`,
+const result = ids.map(id => (
+  {
+    id: id,
+    url: `photos/${id}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
     likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
     comments: {
-      id: ids[0],
+      id: id,
       avatar: `img/avatar-${avatarNumber}.svg`,
       message: getRandomArrayElement(MESSAGE),
       name: getRandomArrayElement(FISRT_NAME) + ' ' + getRandomArrayElement(LAST_NAME),
     },
-  };
-};
+  }),
+)
 
-const arrayDescription = new Array(COUNT).fill(null).map(()=>createDescription());
-console.log(arrayDescription);
-
-
-for(let i=0; i<COUNT.length; i++) {
-  number = ids[i] + "</br>";
-}
-// const arrayDescription = [];
-// arrayDescription.push(createDescription);
+console.log(result);
