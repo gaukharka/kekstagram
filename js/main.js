@@ -101,8 +101,6 @@ const generateArrayID = (arrays, arrayMax) => {
 generateArrayID(commentsId, COMMENT_COUNT);
 generateArrayID(commentId, COMMENT_ID)
 
-console.log(commentId);
-
 const comment = commentsId.map(id => (
   {
     id: `${getRandomArrayElement(commentId)}`,
@@ -127,4 +125,4 @@ const result = ids.map(id => (
     comments: [getRandomArrayComment(comment), getRandomArrayComment(comment)],
   }),
 )
-console.log(result);
+result;
