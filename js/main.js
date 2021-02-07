@@ -56,15 +56,6 @@ const LAST_NAME = [
   'Эванс',
 ]
 
-const MESSAGE = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
-];
-
 const DESCRIPTION = [
   'Ножки крестиком , лапки бантиком',
   'Рыженькие кошки - пушистенькие ножки.',
@@ -74,47 +65,58 @@ const DESCRIPTION = [
   'Ой, какой безмятежный сон у котишки',
 ];
 
+const MESSAGE = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+];
+
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
+const COMMENT_ID = 100;
+const commentId = [];
+const COMMENT_COUNT = 5;
+const commentsId = [];
+const COUNT = 25;
+const ids = [];
+
 
 const getRandomArrayElement = (array) => {
   return array[getRandomNumber(0, array.length-1)];
 }
 
-// Создать массив commentId из 6 неповторяющихся чисел
-const COMMENT_COUNT = 6;
-const commentId = [];
-
-while(commentId.length<COMMENT_COUNT) {
-  const id = getRandomNumber(0, COMMENT_COUNT);
-  if(commentId.indexOf(id) === -1){
-    commentId.push(id);
+// generate unique random array element for id
+const generateArrayID = (arrays, arrayMax) => {
+  while(arrays.length<arrayMax) {
+    const id = getRandomNumber(0, arrayMax);
+    if(arrays.indexOf(id) === -1){
+      arrays.push(id);
+    }
   }
 }
 
-const comment = commentId.map(id => (
+generateArrayID(commentsId, COMMENT_COUNT);
+generateArrayID(commentId, COMMENT_ID)
+
+console.log(commentId);
+
+const comment = commentsId.map(id => (
   {
-    id: id,
+    id: `${getRandomArrayElement(commentId)}`,
     avatar: `img/avatar-${id}.svg`,
     message: MESSAGE[id],
     name: `${getRandomArrayElement(FISRT_NAME)}` + ' ' + `${getRandomArrayElement(LAST_NAME)}`,
   }),
 )
 
-const getRandomArrayComment = (comment) => {
-  return comment[getRandomNumber(1, comment.length-1)];
+const getRandomArrayComment = (item) => {
+  return comment[getRandomNumber(0, item.length)];
 }
 
-// Создать массив ids из 25 неповторяющихся чисел
-const COUNT = 25;
-const ids = [];
-
-while(ids.length<COUNT) {
-  const id = getRandomNumber(1, COUNT);
-  if(ids.indexOf(id) === -1){
-    ids.push(id);
-  }
-}
+generateArrayID(ids, COUNT);
 
 const result = ids.map(id => (
   {
@@ -122,7 +124,7 @@ const result = ids.map(id => (
     url: `photos/${id}.jpg`,
     description: `${getRandomArrayElement(DESCRIPTION)}`,
     likes: `${getRandomNumber(MIN_LIKES, MAX_LIKES)}`,
-    comments: getRandomArrayComment(comment),
+    comments: [getRandomArrayComment(comment), getRandomArrayComment(comment)],
   }),
 )
 console.log(result);
