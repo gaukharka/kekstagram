@@ -22,7 +22,7 @@ const isStringTooLong = function(stringToCheck, maxLength) {
 
 isStringTooLong('casjdajsdjajd ajdjasd asjdjasdjas asdahsdhd', 140);
 
-const FISRT_NAME = [
+const firstNames = [
   'Айрат',
   'Борис',
   'Алёна',
@@ -39,7 +39,7 @@ const FISRT_NAME = [
   'Николь',
 ];
 
-const LAST_NAME = [
+const lastNames = [
   'Смит',
   'Тейлор',
   'Джексон',
@@ -56,7 +56,7 @@ const LAST_NAME = [
   'Эванс',
 ]
 
-const DESCRIPTION = [
+const descriptions = [
   'Ножки крестиком , лапки бантиком',
   'Рыженькие кошки - пушистенькие ножки.',
   'Я на работе)',
@@ -65,7 +65,7 @@ const DESCRIPTION = [
   'Ой, какой безмятежный сон у котишки',
 ];
 
-const MESSAGE = [
+const messages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -76,53 +76,53 @@ const MESSAGE = [
 
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
-const COMMENT_ID = 100;
-const commentId = [];
-const COMMENT_COUNT = 5;
-const commentsId = [];
 const COUNT = 25;
+const MAX_AVATAR = 6;
 const ids = [];
 
 
-const getRandomArrayElement = (array) => {
+const getRandomElement = (array) => {
   return array[getRandomNumber(0, array.length-1)];
 }
 
 // generate unique random array element for id
-const generateArrayID = (arrays, arrayMax) => {
-  while(arrays.length<arrayMax) {
+const fillArrayWithIDS = (array, arrayMax) => {
+  while(array.length<arrayMax) {
     const id = getRandomNumber(0, arrayMax);
-    if(arrays.indexOf(id) === -1){
-      arrays.push(id);
+    if(array.indexOf(id) === -1){
+      array.push(id);
     }
   }
 }
 
-generateArrayID(commentsId, COMMENT_COUNT);
-generateArrayID(commentId, COMMENT_ID)
+fillArrayWithIDS(ids, COUNT);
 
-const comment = commentsId.map(id => (
-  {
-    id: `${getRandomArrayElement(commentId)}`,
-    avatar: `img/avatar-${id}.svg`,
-    message: MESSAGE[id],
-    name: `${getRandomArrayElement(FISRT_NAME)}` + ' ' + `${getRandomArrayElement(LAST_NAME)}`,
-  }),
-)
-
-const getRandomArrayComment = (item) => {
-  return comment[getRandomNumber(0, item.length)];
+const generateComment = (id) => {
+  return {
+    id: `comment${id}`,
+    avatar: `img/avatar-${getRandomNumber(1, MAX_AVATAR)}.svg`,
+    message: messages[getRandomNumber(0, messages.length-1)],
+    name: `${getRandomElement(firstNames)}` + ' ' + `${getRandomElement(lastNames)}`,
+  }
 }
 
-generateArrayID(ids, COUNT);
+const generateComments = (photoId) => {
+  const resultLength = getRandomNumber(1, 2);
+  const result = [];
+  for (let i = 0; i < resultLength; i++) {
+    result.push(generateComment(`${photoId}${i}`));
+  }
+  return result;
+}
 
-const result = ids.map(id => (
+const generatePhotoDescription = ids.map(id => (
   {
     id: id,
     url: `photos/${id}.jpg`,
-    description: `${getRandomArrayElement(DESCRIPTION)}`,
+    description: `${getRandomElement(descriptions)}`,
     likes: `${getRandomNumber(MIN_LIKES, MAX_LIKES)}`,
-    comments: [getRandomArrayComment(comment), getRandomArrayComment(comment)],
+    comments: generateComments(id),
   }),
 )
-result;
+
+generatePhotoDescription();
