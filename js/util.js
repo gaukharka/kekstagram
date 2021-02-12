@@ -14,6 +14,8 @@ const isStringTooLong = function(stringToCheck, maxLength) {
   return stringToCheckLength > maxLength;
 };
 
-isStringTooLong('casjdajsdjajd ajdjasd asjdjasdjas asdahsdhd', 140);
+const getRandomElement = (array) => {
+  return array[getRandomNumber(0, array.length-1)];
+}
+export {getRandomNumber, isStringTooLong, getRandomElement};
 
-export {getRandomNumber};
