@@ -61,7 +61,7 @@ const ids = [];
 // generate unique random array element for id
 const fillArrayWithIDS = (array, arrayMax) => {
   while(array.length<arrayMax) {
-    const id = getRandomNumber(0, arrayMax);
+    const id = getRandomNumber(1, arrayMax);
     if(array.indexOf(id) === -1){
       array.push(id);
     }
@@ -88,13 +88,15 @@ const generateComments = (photoId) => {
   return result;
 }
 
-const photoDescriptionMocks  = ids.map(id => (
-  {
-    id: id,
-    url: `photos/${id}.jpg`,
-    description: `${getRandomElement(descriptions)}`,
-    likes: `${getRandomNumber(MIN_LIKES, MAX_LIKES)}`,
-    comments: generateComments(id),
-  }))
+const generatePicture = () => {
+  return ids.map(id => (
+    {
+      id: id,
+      url: `photos/${id}.jpg`,
+      description: `${getRandomElement(descriptions)}`,
+      likes: `${getRandomNumber(MIN_LIKES, MAX_LIKES)}`,
+      comments: generateComments(id),
+    }))
+}
 
-export {photoDescriptionMocks};
+export {generatePicture};
