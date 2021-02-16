@@ -1,3 +1,2 @@
-import {photoDescriptionMocks} from './data.js';
-
-photoDescriptionMocks;
+import './data.js';
+import './picture.js';
