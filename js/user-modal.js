@@ -1,4 +1,6 @@
 import {isEscEvent, isEnterEvent} from './util.js';
+import { pictures } from './data.js';
+
 
 const pictureCards = document.querySelectorAll('.picture__img');
 const picturePreviewModal = document.querySelector('.big-picture');
@@ -21,11 +23,9 @@ const userCloseModal = () => {
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
-const bigPictureContainer = document.querySelector('.big-picture__img');
-const bigPictureLikesContainer = document.querySelector('.social__likes');
-const bigPictureCommentCountContainer = document.querySelector('.social__comment-count');
-const bigPictureDescriptionContainer = document.querySelector('.social__header');
-const bigPictureCommentsContainer = document.querySelector('.social__comments')
+// containers
+const bigPicturePreview = document.querySelector('.big-picture__preview');
+const bigPictureImg = document.querySelector('.big-picture__img');
 
 
 //open modal
@@ -33,27 +33,22 @@ pictureCards.forEach((card) => {
   card.addEventListener('click', () => {
     userOpenModal();
 
-    const bigPictureImg = bigPictureContainer.querySelector('img');
-    bigPictureImg.src = card.src;
+    const photoId = card.dataset.id;
+    const myPhotoData = pictures.find(photo => photo.id === photoId);
 
-    const bigPictureLikes = bigPictureLikesContainer.querySelector('.likes-count');
-    bigPictureLikes.textContent = card.likes;
+    bigPicturePreview.dataset.id = myPhotoData;
+    const bigPicture = bigPictureImg.querySelector('img');
+    bigPicture.src = card.src;
 
-    const bigPictureCommentCounts = bigPictureCommentCountContainer.querySelector('.comments-count');
-    bigPictureCommentCounts.textContent = card.comments.length;
-
-    const bigPictureDescription = bigPictureDescriptionContainer.querySelector('.social__caption');
-    bigPictureDescription.textContent = card.description;
-
-    const bigPictureCommentsSubContainer = bigPictureCommentsContainer.querySelector('.social__comment');
-    bigPictureCommentsSubContainer.forEach((card) => {
-      const img = bigPictureCommentsSubContainer.querySelector('.social__picture');
-      img.src = card.comments.avatar;
-      img.alt = card.comments.name;
-      const comment = bigPictureCommentsSubContainer.querySelector('.social__text');
-      comment.textContent = card.comments.message;
+    pictures.forEach((photo) => {
+      bigPicturePreview.querySelector('.likes-count').textContent = photo.likes;
+      bigPicturePreview.querySelector('.comments-count').textContent = photo.comments.length;
+      bigPicturePreview.querySelector('.social__caption').textContent = photo.description;
+      bigPicturePreview.querySelector('.social__picture').src = photo.comments.avatar;
+      bigPicturePreview.querySelector('.social__picture').alt = photo.comments.name;
+      bigPicturePreview.querySelector('.social__text').textContent = photo.comments.message;
     });
-    bigPictureCommentsContainer.textContent = card.comments;
+
   });
 
   card.addEventListener('keydown', (evt) => {
@@ -68,4 +63,4 @@ closeButton.forEach((card) => {
   card.addEventListener('click', () => {
     userCloseModal();
   })
-})
+});

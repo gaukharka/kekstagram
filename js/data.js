@@ -99,4 +99,6 @@ const generatePictures = () => {
     }))
 }
 
-export {generatePictures};
+const pictures = generatePictures();
+
+export {pictures};
