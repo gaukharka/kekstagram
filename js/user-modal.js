@@ -23,15 +23,14 @@ const userCloseModal = () => {
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
-// containers
-const bigPicturePreview = document.querySelector('.big-picture__preview');
-const bigPictureImg = document.querySelector('.big-picture__img');
-
-
 //open modal
 pictureCards.forEach((card) => {
-  card.addEventListener('click', () => {
+  card.addEventListener('click', (evt) => {
+    evt.preventDefault();
     userOpenModal();
+
+    const bigPicturePreview = document.querySelector('.big-picture__preview');
+    const bigPictureImg = document.querySelector('.big-picture__img');
 
     const photoId = card.dataset.id;
     const myPhotoData = pictures.find(photo => photo.id === photoId);
@@ -49,7 +48,15 @@ pictureCards.forEach((card) => {
       bigPicturePreview.querySelector('.social__text').textContent = photo.comments.message;
     });
 
+    // delete     UNCOMMENT LATER
+    // const commentCounts = bigPicturePreview.querySelector('.social__comment-count');
+    // commentCounts.classList.add('hidden');
+    // const commentLoader = bigPicturePreview.querySelector('.comments-loader');
+    // commentLoader.classList.add('hidden');
+    document.body.classList.add('modal-open');
   });
+
+
 
   card.addEventListener('keydown', (evt) => {
     if (isEnterEvent(evt)) {
