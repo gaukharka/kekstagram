@@ -88,7 +88,7 @@ const generateComments = (photoId) => {
   return result;
 }
 
-const generatePicture = () => {
+const generatePictures = () => {
   return ids.map(id => (
     {
       id: id,
@@ -99,4 +99,4 @@ const generatePicture = () => {
     }))
 }
 
-export {generatePicture};
+export {generatePictures};
