@@ -91,7 +91,7 @@ const generateComments = (photoId) => {
 const generatePictures = () => {
   return ids.map(id => (
     {
-      id: id,
+      id: `${id}`,
       url: `photos/${id}.jpg`,
       description: `${getRandomElement(descriptions)}`,
       likes: `${getRandomNumber(MIN_LIKES, MAX_LIKES)}`,

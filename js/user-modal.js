@@ -22,39 +22,41 @@ const userCloseModal = () => {
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
-// const bigPicturePreview = document.querySelector('.big-picture__preview');   //mojno udalit pozje
-
 //open modal
 pictureCards.forEach((card) => {
   card.addEventListener('click', (evt) => {
     evt.preventDefault();
     userOpenModal();
 
-    const bigPictureImg = document.querySelector('.big-picture__img');
-    const bigPicture = bigPictureImg.querySelector('img');
-    bigPicture.src = card.src;
     const photoId = card.dataset.id;
-    const bigPictureData = pictures.find(photo => photo.id = photoId);
+    const bigPictureData = pictures.find(photo => photo.id === photoId);
+
+    picturePreviewModal.querySelector('.big-picture__img').querySelector('img').src = bigPictureData.url;
     picturePreviewModal.querySelector('.likes-count').textContent = bigPictureData.likes;
     picturePreviewModal.querySelector('.comments-count').textContent = bigPictureData.comments.length;
     picturePreviewModal.querySelector('.social__caption').textContent = bigPictureData.description;
-    picturePreviewModal.querySelector('.social__picture').src = 'bigPictureData.comments.avatar';
-    picturePreviewModal.querySelector('.social__picture').alt = 'bigPictureData.comments.name';
-    picturePreviewModal.querySelector('.social__text').textContent = bigPictureData;
 
-    // UNCOMMENT LATER
-    // const commentCounts = picturePreviewModal.querySelector('.social__comment-count');
-    // commentCounts.classList.add('hidden');
-    // const commentLoader = picturePreviewModal.querySelector('.comments-loader');
-    // commentLoader.classList.add('hidden');
-    // document.body.classList.add('modal-open');
+    for(let i=0; i < bigPictureData.comments.length-1; i++) {
+      const commentsTemplate = document.querySelector('.social__comment');
+      commentsTemplate.querySelector('.social__picture').src = bigPictureData.comments[i].avatar;
+      commentsTemplate.querySelector('.social__picture').alt = bigPictureData.comments[i].name;
+      commentsTemplate.querySelector('.social__text').textContent = bigPictureData.comments[i].message;
+      picturePreviewModal.querySelector('.social__comments').append(commentsTemplate);
+    }
+
+    const commentCounts = picturePreviewModal.querySelector('.social__comment-count');
+    commentCounts.classList.add('hidden');
+    const commentLoader = picturePreviewModal.querySelector('.comments-loader');
+    commentLoader.classList.add('hidden');
+    document.body.classList.add('modal-open');
   });
-
   card.addEventListener('keydown', (evt) => {
     if (isEnterEvent(evt)) {
       userOpenModal();
     }
   });
+
+  return picturePreviewModal;
 });
 
 // close modal
