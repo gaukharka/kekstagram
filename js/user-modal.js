@@ -36,13 +36,13 @@ pictureCards.forEach((card) => {
     picturePreviewModal.querySelector('.comments-count').textContent = bigPictureData.comments.length;
     picturePreviewModal.querySelector('.social__caption').textContent = bigPictureData.description;
 
-    for(let i=0; i < bigPictureData.comments.length-1; i++) {
-      const commentsTemplate = document.querySelector('.social__comment');
+    const commentsTemplate = document.querySelector('.social__comment');
+    for(let i=0; i <= bigPictureData.comments.length-1; i++) {
       commentsTemplate.querySelector('.social__picture').src = bigPictureData.comments[i].avatar;
       commentsTemplate.querySelector('.social__picture').alt = bigPictureData.comments[i].name;
       commentsTemplate.querySelector('.social__text').textContent = bigPictureData.comments[i].message;
-      picturePreviewModal.querySelector('.social__comments').append(commentsTemplate);
     }
+    picturePreviewModal.querySelector('.social__comments').append(commentsTemplate);
 
     const commentCounts = picturePreviewModal.querySelector('.social__comment-count');
     commentCounts.classList.add('hidden');
@@ -50,13 +50,12 @@ pictureCards.forEach((card) => {
     commentLoader.classList.add('hidden');
     document.body.classList.add('modal-open');
   });
+
   card.addEventListener('keydown', (evt) => {
     if (isEnterEvent(evt)) {
       userOpenModal();
     }
   });
-
-  return picturePreviewModal;
 });
 
 // close modal
