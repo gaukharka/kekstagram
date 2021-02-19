@@ -37,7 +37,7 @@ pictureCards.forEach((card) => {
     picturePreviewModal.querySelector('.social__caption').textContent = bigPictureData.description;
 
     const commentsTemplate = document.querySelector('.social__comment');
-    for(let i=0; i <= bigPictureData.comments.length-1; i++) {
+    for(let i=0; i < bigPictureData.comments.length; i++) {
       commentsTemplate.querySelector('.social__picture').src = bigPictureData.comments[i].avatar;
       commentsTemplate.querySelector('.social__picture').alt = bigPictureData.comments[i].name;
       commentsTemplate.querySelector('.social__text').textContent = bigPictureData.comments[i].message;
