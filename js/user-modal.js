@@ -45,43 +45,42 @@ const createComment = (tagName, className) => {
 };
 
 // on photo click handling function
-const clickHandler = (pictureCard, picture) => {
-  pictureCard.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    userOpenModal();
-    bigPictureImg.src = picture.url;
-    bigPictureLikesCount.textContent = picture.likes;
-    bigPictureCommentsCount.textContent = picture.comments.length;
-    bigPictureDescription.textContent = picture.description;
-    const comments = picture.comments;
+const clickHandler = (evt, picture) => {
+  evt.preventDefault();
+  userOpenModal();
+  bigPictureImg.src = picture.url;
+  bigPictureLikesCount.textContent = picture.likes;
+  bigPictureCommentsCount.textContent = picture.comments.length;
+  bigPictureDescription.textContent = picture.description;
+  const comments = picture.comments;
 
-    const commentFragment = document.createDocumentFragment();
-    for (let j = 0; j < comments.length; j++) {
-      const commentListElement = createComment('li', 'social__comment');
-      const commentAvatar = createComment('img', 'social__picture');
-      commentAvatar.src = comments[j].avatar;
-      commentAvatar.alt = comments[j].name;
-      commentListElement.appendChild(commentAvatar);
-      const commentText = createComment('p', 'social__text');
-      commentText.textContent = comments[j].message;
-      commentListElement.appendChild(commentText);
-      commentFragment.appendChild(commentListElement);
-    }
-    socialComments.appendChild(commentFragment);
+  const commentFragment = document.createDocumentFragment();
+  for (let j = 0; j < comments.length; j++) {
+    const commentListElement = createComment('li', 'social__comment');
+    const commentAvatar = createComment('img', 'social__picture');
+    commentAvatar.src = comments[j].avatar;
+    commentAvatar.alt = comments[j].name;
+    commentListElement.appendChild(commentAvatar);
+    const commentText = createComment('p', 'social__text');
+    commentText.textContent = comments[j].message;
+    commentListElement.appendChild(commentText);
+    commentFragment.appendChild(commentListElement);
+  }
+  socialComments.appendChild(commentFragment);
 
-    commentCounts.classList.add('hidden');
-    commentLoader.classList.add('hidden');
-    document.body.classList.add('modal-open');
-  });
+  commentCounts.classList.add('hidden');
+  commentLoader.classList.add('hidden');
+  document.body.classList.add('modal-open');
+  // });
+};
+
+for (let i = 0; i < pictureCard.length; i++) {
+  pictureCard[i].addEventListener('click', (evt) => clickHandler(evt, pictures[i]));
   document.addEventListener('keydown', (evt) => {
     if (isEnterEvent(evt)) {
       userOpenModal();
     }
   });
-};
-
-for (let i = 0; i < pictureCard.length; i++) {
-  clickHandler(pictureCard[i], pictures[i]);
 }
 
 // close modal
