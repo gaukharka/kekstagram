@@ -26,5 +26,11 @@ const isEnterEvent = (evt) => {
   return evt.key === 'Enter';
 };
 
-export {getRandomNumber, isStringTooLong, getRandomElement, isEscEvent, isEnterEvent};
+const createElement = (tagName, className) => {
+  const newElement = document.createElement(tagName);
+  newElement.classList.add(className);
+  return newElement;
+};
+
+export {getRandomNumber, isStringTooLong, getRandomElement, isEscEvent, isEnterEvent, createElement};
 
