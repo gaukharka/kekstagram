@@ -16,6 +16,21 @@ const isStringTooLong = function(stringToCheck, maxLength) {
 
 const getRandomElement = (array) => {
   return array[getRandomNumber(0, array.length-1)];
-}
-export {getRandomNumber, isStringTooLong, getRandomElement};
+};
+
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+
+const createElement = (tagName, className) => {
+  const newElement = document.createElement(tagName);
+  newElement.classList.add(className);
+  return newElement;
+};
+
+export {getRandomNumber, isStringTooLong, getRandomElement, isEscEvent, isEnterEvent, createElement};
 

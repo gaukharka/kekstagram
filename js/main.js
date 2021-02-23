@@ -1,2 +1,3 @@
 import './data.js';
-import './picture.js';
+import './small-pictures.js';
+import './user-modal.js';
