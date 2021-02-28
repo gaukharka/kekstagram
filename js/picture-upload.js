@@ -4,7 +4,7 @@ const uploadFile = document.querySelector('#upload-file').files[0];
 const uploadForm = document.querySelector('.img-upload__form');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadEffectLevel = uploadForm.querySelector('.img-upload__effect-level');
-const closeButton = document.querySelector('.img-upload__cancel');
+const closeButton = document.querySelector('#upload-cancel');
 const resizeFileValue = document.querySelector('.scale__control--value');
 const minimizeButton = document.querySelector('.scale__control--smaller');
 const maximizeButton = document.querySelector('.scale__control--bigger');
@@ -22,10 +22,16 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
+const onPopupCloseClick = (evt) => {
+  evt.preventDefault();
+  closeModal();
+}
+
 const closeModal = () => {
   imgUploadOverlay.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  closeButton.addEventListener('click', onPopupEscKeydown);
+  // document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  closeButton.removeEventListener('click', onPopupCloseClick);
 }
 
 if(uploadFile !== 0){
@@ -59,7 +65,5 @@ minimizeButton.addEventListener('click', () => {
 maximizeButton.addEventListener('click', () => {
   maximizeImg();
 })
-
-
 
 export {uploadForm} ;
