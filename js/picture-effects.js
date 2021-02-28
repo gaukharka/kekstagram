@@ -15,10 +15,6 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const sliderValue = document.querySelector('.effect-level__value');
 sliderValue.value = '';
 
-effectOriginal.addEventListener('click', () => {
-  imgUploadEffectLevel.classList.add('hidden');
-})
-
 noUiSlider.create(sliderElement, {
   range: {
     'min': 0,
@@ -29,10 +25,13 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
-
 sliderElement.noUiSlider.on('update', (values, handle) => {
   sliderValue.value = values[handle];
 });
+
+effectOriginal.addEventListener('click', () => {
+  imgUploadEffectLevel.classList.add('hidden');
+})
 
 // CHROME
 effectChrome.addEventListener('click', () => {

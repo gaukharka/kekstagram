@@ -46,8 +46,6 @@ commentInput.addEventListener('input', () => {
   commentInput.reportValidity();
 })
 
-
-
 // /#\w+$/
 
 // !@#$%^&*.,<>/\'";:? and return true if the string contains atleast one of those chars.
