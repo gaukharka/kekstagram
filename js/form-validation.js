@@ -2,30 +2,28 @@ const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
 
 const MAX_HASHTAG_LENGTH = 20;
-const MAX_HASHTAG_COUNT = 10;
+const MAX_HASHTAG_COUNT = 5;
 const MAX_COMMENT_LENGTH = 140;
-const regex = /#\w+$/;
 
 //  HASHTAGS
 hashtagInput.addEventListener('input', (evt) => {
 
+  const regex = /[ !@$%^&*()_+\-=\]{};':"\\|,.<>?]/g;
   const input = evt.target;
-  const hashtags = input.value.split(' ');     // array
+  const hashtag = input.value.trim().toLowerCase();
+  const hashtags = hashtag.split(' ');
 
-  // Не могу понять что неправильно делаю, но этот код не работает
   for(let i=0; i < hashtags.length; i++){
-    console.log(hashtags[i][0]);
-
-    if(hashtags[i][0] !== '#'){
+    if(hashtags[i].charAt(0) !== '#'){
       input.setCustomValidity('Хэштег должен начинаться с символа #')
-    } else if(!hashtags[i].match(regex)){
-      input.setCustomValidity('Хэштег должен состоять из букв и чисел и не может содержать пробелы, спецсимволы, символы пунктуации, эмодзи и т. д')
-    } else if(hashtags.length >= MAX_HASHTAG_COUNT){
+    } else if(hashtags.length > MAX_HASHTAG_COUNT){
       input.setCustomValidity('Допускаемое количество хэштегов max 5');
     } else if(hashtags[i].length >= MAX_HASHTAG_LENGTH){
-      input.setCustomValidity('Допустимая длина хэштегов 20 символов');      // working
+      input.setCustomValidity('Допустимая длина хэштегов 20 символов');
     } else if(hashtags[i] === hashtags[i-1]){
-      input.setCustomValidity('Хэштеги не должны повторятся');                // working
+      input.setCustomValidity('Хэштеги не должны повторятся');
+    } else if(regex.test(hashtags[i])){
+      input.setCustomValidity('Хэштег не должен содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.');
     } else {
       input.setCustomValidity('');
     }
@@ -42,11 +40,5 @@ commentInput.addEventListener('input', () => {
   } else {
     commentInput.setCustomValidity('');
   }
-
   commentInput.reportValidity();
 })
-
-// /#\w+$/
-
-// !@#$%^&*.,<>/\'";:? and return true if the string contains atleast one of those chars.
-//   /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
