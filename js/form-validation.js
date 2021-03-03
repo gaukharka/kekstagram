@@ -5,7 +5,6 @@ const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_COUNT = 5;
 const MAX_COMMENT_LENGTH = 140;
 
-//  HASHTAGS
 hashtagInput.addEventListener('input', (evt) => {
 
   const regex = /[ !@$%^&*()_+\-=\]{};':"\\|,.<>?]/g;
@@ -31,7 +30,6 @@ hashtagInput.addEventListener('input', (evt) => {
   }
 })
 
-// COMMENTS
 commentInput.addEventListener('input', () => {
   const commentValueLength = commentInput.value.length;
 

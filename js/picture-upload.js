@@ -56,10 +56,13 @@ const filePreview = () => {
 };
 
 const processPhoto= () => {
-  openUploadModal();
   filePreview();
+  openUploadModal();
 }
 
-fileUpload.addEventListener('change', processPhoto);
+fileUpload.addEventListener('change', (evt) => {
+  evt.stopPropagation();
+  processPhoto();
+});
 
-export {uploadForm, imgUploadPreview} ;
+export {uploadForm, imgUploadPreview, onPopupEscKeydown, onPopupCloseClick, closeButton} ;

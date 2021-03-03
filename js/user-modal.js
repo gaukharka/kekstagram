@@ -16,28 +16,31 @@ const commentLoader = picturePreviewModal.querySelector('.comments-loader');
 const onPopupEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
-    userCloseModal();
+    closeModal();
   }
 };
 
 const onPopupCloseClick = (evt) => {
   evt.preventDefault();
-  userCloseModal();
+  closeModal();
 }
 
-const userOpenModal = () => {
+const openModal = () => {
   picturePreviewModal.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscKeydown);
   closeButton.addEventListener('click', onPopupCloseClick);
 };
 
-const userCloseModal = () => {
+const closeModal = () => {
   picturePreviewModal.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscKeydown);
   closeButton.removeEventListener('click', onPopupCloseClick);
 };
 
 const clickHandler = (evt, picture) => {
+  evt.preventDefault();
+  openModal();
+
   socialComments.innerHTML = '';
   const {url, likes, comments, description} = picture;
   bigPictureImg.src = url;
@@ -63,9 +66,6 @@ const clickHandler = (evt, picture) => {
   commentCounts.classList.add('hidden');
   commentLoader.classList.add('hidden');
   document.body.classList.add('modal-open');
-
-  evt.preventDefault();
-  userOpenModal();
 };
 
 for (let i = 0; i < pictureCard.length; i++) {

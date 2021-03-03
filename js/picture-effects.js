@@ -29,8 +29,25 @@ sliderElement.noUiSlider.on('update', (values, handle) => {
   sliderValue.value = values[handle];
 });
 
-effectOriginal.addEventListener('click', () => {
+effectOriginal.addEventListener('change', () => {
+  imgUploadPreview.classList.add('effects__preview--none');
   imgUploadEffectLevel.classList.add('hidden');
+
+  noUiSlider.create(sliderElement, {
+    range: {
+      'min': 0,
+      'max': 1,
+    },
+    start: 0.5,
+    step: 0.1,
+    connect: 'lower',
+  });
+
+  sliderElement.noUiSlider.on('update', (values, handle) => {
+    sliderValue.value = '';
+  });
+
+
 })
 
 // CHROME
