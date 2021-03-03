@@ -4,12 +4,12 @@ const fileUpload = document.querySelector('.img-upload__input');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const closeButton = document.querySelector('#upload-cancel');
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-
 const uploadForm = document.querySelector('.img-upload__form');
 const imgUploadEffectLevel = uploadForm.querySelector('.img-upload__effect-level');
+const imgUploadPreviewImg = imgUploadPreview.querySelector('img');
 
-// open close modal control
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 const onPopupEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
@@ -37,12 +37,9 @@ const closeUploadModal = () => {
   closeButton.removeEventListener('click', onPopupCloseClick);
 }
 
-
-// upload function
 const filePreview = () => {
-  const file = document.querySelector('#upload-file').files[0];
+  const file = fileUpload.files[0];
   const fileName = file.name.toLowerCase();
-  const imgUploadPreviewImg = imgUploadPreview.querySelector('img');
 
   const matches = FILE_TYPES.some((it) => {
     return fileName.endsWith(it);
@@ -54,12 +51,15 @@ const filePreview = () => {
       imgUploadPreviewImg.src = fileReader.result;
     });
 
-    fileReader.readAsDataURL(fileName);
+    fileReader.readAsDataURL(file);
   }
 };
 
-imgUploadPreview.addEventListener('change', filePreview)
+const processPhoto= () => {
+  openUploadModal();
+  filePreview();
+}
 
-fileUpload.addEventListener('change', openUploadModal);
+fileUpload.addEventListener('change', processPhoto);
 
 export {uploadForm, imgUploadPreview} ;
