@@ -65,4 +65,4 @@ fileUpload.addEventListener('change', (evt) => {
   processPhoto();
 });
 
-export {uploadForm, imgUploadPreview, onPopupEscKeydown, onPopupCloseClick, closeButton} ;
+export {uploadForm, imgUploadPreview, fileUpload} ;

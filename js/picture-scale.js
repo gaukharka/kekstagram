@@ -1,29 +1,26 @@
-import {imgUploadPreview} from './picture-upload.js';
-
-const imgUploadPreviewImg = imgUploadPreview.getElementsByTagName('img');
+const uploadPreview = document.querySelector('.img-upload__preview');
+const uploadedImg = uploadPreview.querySelector('img');
 
 const minimizeButton = document.querySelector('.scale__control--smaller');
 const maximizeButton = document.querySelector('.scale__control--bigger');
-
-const fileSize = imgUploadPreviewImg[0].width;
-const scale = fileSize*25/100;
+const scaleControl = document.querySelector('.scale__control--value');
 
 const minimizeImg = () => {
-  const currentWidth = imgUploadPreviewImg[0].width;
+  const currentValue = parseInt(scaleControl.value);
+  const updatedValue = currentValue - 25;
+  const value = Math.max(updatedValue, 25)
 
-  if(currentWidth <= fileSize && currentWidth > scale){
-    imgUploadPreviewImg[0].width = (currentWidth  - scale);
-    document.querySelector('.scale__control--value').value = parseInt(document.querySelector('.scale__control--value').value) - 25 + '%';
-  }
+  uploadedImg.style.transform = 'scale(' + value/100 + ')';
+  scaleControl.value = value + '%';
 };
 
 const maximizeImg = () => {
-  const currentWidth = imgUploadPreviewImg[0].width;
+  const currentValue = parseInt(scaleControl.value);
+  const updatedValue = currentValue + 25;
+  const value = Math.min(updatedValue, 100)
 
-  if(currentWidth < fileSize ){
-    imgUploadPreviewImg[0].width = (currentWidth + scale + 1);
-    document.querySelector('.scale__control--value').value = parseInt(document.querySelector('.scale__control--value').value) + 25 + '%';
-  }
+  uploadedImg.style.transform = 'scale(' + value/100 + ')';
+  scaleControl.value = value + '%';
 };
 
 minimizeButton.addEventListener('click', minimizeImg);
