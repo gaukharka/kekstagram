@@ -27,7 +27,6 @@ noUiSlider.create(sliderElement, {
   },
   start: 0,
   step: 0.1,
-  connect: 'lower',
 });
 
 // ORIGINAL
@@ -103,7 +102,7 @@ effectMarvin.addEventListener('click', () => {
 
 // PHOBOS
 effectPhobos.addEventListener('click', () => {
-  effectLevel.classList.remove('hidden');
+  showSlider();
 
   sliderElement.noUiSlider.updateOptions({
     range: {
@@ -124,7 +123,7 @@ effectPhobos.addEventListener('click', () => {
 
 // HEAT
 effectHeat.addEventListener('click', () => {
-  showSlider;
+  showSlider();
 
   sliderElement.noUiSlider.updateOptions({
     range: {

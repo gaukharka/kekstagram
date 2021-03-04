@@ -11,13 +11,13 @@ hashtagInput.addEventListener('input', (evt) => {
   const input = evt.target;
   const hashtag = input.value.trim().toLowerCase();
   const hashtags = hashtag.split(' ');
-
   const newHashtags = new Set(hashtags);
-
 
   for(let i=0; i < hashtags.length; i++){
     if(hashtags[i].charAt(0) !== '#'){
-      input.setCustomValidity('Хэштег должен начинаться с символа #')
+      input.setCustomValidity('Хэштег должен начинаться с символа #');
+    } else if(hashtags[i] === '#'){
+      input.setCustomValidity('Хэштег не может состоять только из одной решётки');
     } else if(hashtags.length > MAX_HASHTAG_COUNT){
       input.setCustomValidity('Допускаемое количество хэштегов max 5');
     } else if(hashtags[i].length >= MAX_HASHTAG_LENGTH){
@@ -43,3 +43,5 @@ commentInput.addEventListener('input', () => {
   }
   commentInput.reportValidity();
 })
+
+export {hashtagInput, commentInput};
