@@ -52,7 +52,7 @@ effectChrome.addEventListener('click', () => {
 
   sliderElement.noUiSlider.on('update', (values, handle) => {
     sliderValue.value = values[handle];
-    const filterValue = 'grayscale(' + sliderValue.value + ')';
+    const filterValue = (`grayscale(${sliderValue.value})`);
     uploadPreview.style.filter = filterValue;
     uploadPreview.style.webkitFilter = filterValue;
   });
@@ -73,7 +73,7 @@ effectSepia.addEventListener('click', () => {
 
   sliderElement.noUiSlider.on('update', (values, handle) => {
     sliderValue.value = values[handle];
-    const filterValue = 'sepia(' + sliderValue.value + ')';
+    const filterValue = (`sepia(${sliderValue.value})`);
     uploadPreview.style.filter = filterValue;
     uploadPreview.style.webkitFilter = filterValue;
   });
@@ -94,7 +94,7 @@ effectMarvin.addEventListener('click', () => {
 
   sliderElement.noUiSlider.on('update', (values, handle) => {
     sliderValue.value = values[handle];
-    const filterValue = 'invert(' + sliderValue.value + '%' + ')';
+    const filterValue = (`invert(${sliderValue.value}%)`);
     uploadPreview.style.filter = filterValue;
     uploadPreview.style.webkitFilter = filterValue;
   });
@@ -115,7 +115,7 @@ effectPhobos.addEventListener('click', () => {
 
   sliderElement.noUiSlider.on('update', (values, handle) => {
     sliderValue.value = values[handle];
-    const filterValue = 'blur(' + sliderValue.value + 'px' + ')';
+    const filterValue = (`blur(${sliderValue.value}px)`);
     uploadPreview.style.filter = filterValue;
     uploadPreview.style.webkitFilter = filterValue;
   });
@@ -136,7 +136,7 @@ effectHeat.addEventListener('click', () => {
 
   sliderElement.noUiSlider.on('update', (values, handle) => {
     sliderValue.value = values[handle];
-    const filterValue = 'brightness(' + sliderValue.value  + ')';
+    const filterValue = (`brightness(${sliderValue.value})`);
     uploadPreview.style.filter = filterValue;
     uploadPreview.style.webkitFilter = filterValue;
   });
