@@ -17,7 +17,7 @@ const renderBigPicture = (picture) => {
       openModal();
 
       socialComments.innerHTML = '';
-      const {url, likes, comments, description} = picture;
+      const {url, likes, comments, description} = picture[i];
       bigPictureImg.src = url;
       bigPictureLikesCount.textContent = likes;
       bigPictureCommentsCount.textContent = comments.length;
@@ -43,6 +43,6 @@ const renderBigPicture = (picture) => {
       document.body.classList.add('modal-open');
     });
   }
-}
+};
 
 export {renderBigPicture};

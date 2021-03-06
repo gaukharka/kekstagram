@@ -4,6 +4,7 @@ import './picture-effects.js';
 import './form-validation.js';
 import './picture-scale.js';
 import './form-control.js';
+import './big-picture.js';
 import {renderBigPicture} from './big-picture.js';
 import {renderSmallPictures} from './small-pictures.js';
 
@@ -12,5 +13,4 @@ fetch('https://22.javascript.pages.academy/kekstagram/data')
   .then((data) => {
     renderSmallPictures(data);
     renderBigPicture(data);
-    console.log(data)
   });
