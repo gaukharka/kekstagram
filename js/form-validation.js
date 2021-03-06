@@ -1,5 +1,6 @@
 import {isStringTooLong} from './util.js';
 
+const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
 
@@ -46,4 +47,19 @@ commentInput.addEventListener('input', () => {
   commentInput.reportValidity();
 });
 
-export {hashtagInput, commentInput};
+const formSubmit = (onSuccess) => {
+  uploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault;
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://22.javascript.pages.academy/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    );
+  });
+};
+
+export {hashtagInput, commentInput, uploadForm, formSubmit};
