@@ -27,4 +27,4 @@ const closeModal = () => {
   closeButton.removeEventListener('click', onPopupCloseClick);
 };
 
-export {openModal, picturePreviewModal};
+export {openModal, closeModal, picturePreviewModal};

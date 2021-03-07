@@ -58,7 +58,7 @@ const formSubmit = (onSuccess) => {
         method: 'POST',
         body: formData,
       },
-    );
+    ).then(() => onSuccess());
   });
 };
 
