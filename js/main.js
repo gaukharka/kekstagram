@@ -8,13 +8,13 @@ import './big-picture.js';
 import {closeModal} from './user-modal.js';
 import {renderBigPicture} from './big-picture.js';
 import {renderSmallPictures} from './small-pictures.js';
+import './message.js';
 
 fetch('https://22.javascript.pages.academy/kekstagram/data')
   .then((response) => response.json())
   .then((data) => {
     renderSmallPictures(data);
     renderBigPicture(data);
-    console.log(data)
   });
 
 formSubmit(closeModal);

@@ -1,4 +1,5 @@
 import {isStringTooLong} from './util.js';
+import {renderSuccessMessage, renderErrorMessage} from './message.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
@@ -53,12 +54,23 @@ const formSubmit = (onSuccess) => {
     const formData = new FormData(evt.target);
 
     fetch(
-      'https://22.javascript.pages.academy/kekstagram',
+      'https://22.javascript.pages.academy/404',
       {
         method: 'POST',
         body: formData,
       },
-    ).then(() => onSuccess());
+    )
+      .then((response) => {
+        if(response.ok){
+          onSuccess();
+          renderSuccessMessage;
+        } else {
+          renderErrorMessage();
+        }
+      })
+      .catch(() => {
+        renderErrorMessage();
+      });
   });
 };
 

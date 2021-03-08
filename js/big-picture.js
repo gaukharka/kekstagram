@@ -14,6 +14,7 @@ const COMMENTS_MAX = 5;
 const moreComments = () => {
   commentLoader.addEventListener('click', (evt) => {
     evt.preventDefault;
+    evt.target.classList.add('hidden');
   });
   return commentLoader;
 };
@@ -48,8 +49,8 @@ const renderBigPicture = (picture) => {
           commentListElement.appendChild(commentText);
           commentFragment.appendChild(commentListElement);
         }
-      } else if(moreComments){
-        for (let j = 0; j < COMMENTS_MAX; j++) {
+        moreComments();
+        for (let j = 5; j < comments.length; j++) {
           const commentListElement = createElement('li', 'social__comment');
           const commentAvatar = createElement('img', 'social__picture');
           const {avatar, name, message} = comments[j];
