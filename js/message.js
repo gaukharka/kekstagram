@@ -1,14 +1,15 @@
-const main = document.querySelector('main');
 const successContainer = document.querySelector('#success').content.querySelector('.success');
 const successTemplate = successContainer.querySelector('.success__inner');
 const successMessageFragment = document.createDocumentFragment();
 
+const ALERT_SHOW_TIME = 100000;
+
 const renderSuccessMessage = () => {
   const element = successTemplate.cloneNode(true);
-  element.querySelector('.success__title');
-  element.querySelector('.success__button');
+  element.querySelector('.success__title').textContent;
+  element.querySelector('.success__button').textContent;
   successMessageFragment.appendChild(element);
-  main.appendChild(successMessageFragment);
+  document.querySelector('main').append(successMessageFragment);
 };
 
 const errorContainer  = document.querySelector('#error').content.querySelector('.error');
@@ -20,7 +21,11 @@ const renderErrorMessage = () => {
   element.querySelector('.error__title');
   element.querySelector('.error__button');
   errorMessageFragment.appendChild(element);
-  main.appendChild(errorMessageFragment);
+  document.body.append(errorMessageFragment);
+
+  setTimeout(() => {
+    errorMessageFragment.remove();
+  }, ALERT_SHOW_TIME);
 };
 
 export {renderSuccessMessage, renderErrorMessage};

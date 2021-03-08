@@ -48,4 +48,4 @@ commentInput.addEventListener('focusout', () => {
   document.addEventListener('keydown', onPopupEscKeydown)
 });
 
-export {openUploadModal};
+export {openUploadModal, closeUploadModal};
