@@ -1,6 +1,6 @@
 import {isStringTooLong} from './util.js';
-import {renderErrorMessage} from './message.js';
-import { sendData } from './api.js';
+import {renderSuccessMessage, renderErrorMessage} from './message.js';
+import {closeUploadModal} from './form-control.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
@@ -53,28 +53,27 @@ const formSubmit = (onSuccess) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault;
 
-    sendData(
-      ()=> onSuccess(),
-      () => renderErrorMessage(),
-      new FormData(evt.target),
-    );
-  //   fetch('https://22.javascript.pages.academy/kekstagram',
-  //     {
-  //       method: 'POST',
-  //       body: formData,
-  //     },
-  //   )
-  //     .then((response) => {
-  //       if(response.ok) {
-  //         onSuccess();
-  //       } else {
-  //         renderErrorMessage();
-  //       }
-  //     })
-  //     .catch(() => {
-  //       renderErrorMessage();
-  //       console.log(renderErrorMessage())
-  //     })
+    const formData = new FormData(evt.target);
+
+    fetch('https://22.javascript.pages.academy/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+      .then((response) => {
+        if(response.ok) {
+          renderSuccessMessage();
+          onSuccess();
+        } else {
+          renderErrorMessage();
+          closeUploadModal();
+        }
+      })
+      .catch(() => {
+        renderErrorMessage();
+        closeUploadModal();
+      })
   });
 };
 

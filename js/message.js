@@ -1,31 +1,42 @@
-const successContainer = document.querySelector('#success').content.querySelector('.success');
-const successTemplate = successContainer.querySelector('.success__inner');
-const successMessageFragment = document.createDocumentFragment();
+import {isEscEvent} from './util.js';
 
-const ALERT_SHOW_TIME = 100000;
+const main = document.querySelector('main');
 
 const renderSuccessMessage = () => {
-  const element = successTemplate.cloneNode(true);
-  element.querySelector('.success__title').textContent;
-  element.querySelector('.success__button').textContent;
-  successMessageFragment.appendChild(element);
-  document.querySelector('main').append(successMessageFragment);
+  const template = document.querySelector('#success').content;
+  const element = template.cloneNode(true);
+  main.appendChild(element);
+
+  const successButton = main.querySelector('.success__button');
+  successButton.addEventListener('click', closeSuccessMessage);
+  document.addEventListener('keydown', onPopupEscKeydown);
 };
 
-const errorContainer  = document.querySelector('#error').content.querySelector('.error');
-const errorTemplate = errorContainer.querySelector('.error__inner');
-const errorMessageFragment = document.createDocumentFragment();
+const onPopupEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closeSuccessMessage();
+  }
+};
+
+const closeSuccessMessage = () => {
+  document.querySelector('#success').remove();
+  document.removeEventListener('keydown', onPopupEscKeydown);
+};
 
 const renderErrorMessage = () => {
-  const element = errorTemplate.cloneNode(true);
-  element.querySelector('.error__title');
-  element.querySelector('.error__button');
-  errorMessageFragment.appendChild(element);
-  document.body.append(errorMessageFragment);
+  const template = document.querySelector('#error').content;
+  const element = template.cloneNode(true);
+  main.appendChild(element);
 
-  setTimeout(() => {
-    errorMessageFragment.remove();
-  }, ALERT_SHOW_TIME);
+  const successButton = main.querySelector('.error__button');
+  successButton.addEventListener('click', closeErrorMessage);
+  document.addEventListener('keydown', onPopupEscKeydown);
+};
+
+const closeErrorMessage = () => {
+  document.querySelector('#error').remove();
+  document.removeEventListener('keydown', onPopupEscKeydown);
 };
 
 export {renderSuccessMessage, renderErrorMessage};

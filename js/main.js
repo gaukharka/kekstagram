@@ -7,12 +7,14 @@ import './big-picture.js';
 import './user-modal.js';
 import {renderBigPicture} from './big-picture.js';
 import {renderSmallPictures} from './small-pictures.js';
-import {renderSuccessMessage} from './message.js';
-import { getData } from './api.js';
+import './message.js';
+// import { getData } from './api.js';
 
-getData((data) => {
-  renderSmallPictures(data);
-  renderBigPicture(data);
-});
+fetch('https://22.javascript.pages.academy/kekstagram/data')
+  .then((response) => response.json())
+  .then((data) => {
+    renderSmallPictures(data);
+    renderBigPicture(data);
+  });
 
-formSubmit(renderSuccessMessage);
+formSubmit(closeUploadModal);
