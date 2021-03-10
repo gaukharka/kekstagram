@@ -1,13 +1,13 @@
 import './picture-upload.js';
 import './picture-effects.js';
-import {formSubmit} from './form-validation.js';
+import './form-validation.js';
 import './picture-scale.js';
 import {closeUploadModal} from './form-control.js';
 import './big-picture.js';
 import './user-modal.js';
 import {renderBigPicture} from './big-picture.js';
 import {renderSmallPictures} from './small-pictures.js';
-import './message.js';
+import {formSubmit} from './send-data.js';
 // import { getData } from './api.js';
 
 fetch('https://22.javascript.pages.academy/kekstagram/data')

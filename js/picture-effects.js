@@ -1,6 +1,6 @@
 /* global noUiSlider:readonly */
-import {uploadForm} from './form-validation.js';
 
+const uploadForm = document.querySelector('.img-upload__form');
 const effectLevel = uploadForm.querySelector('.img-upload__effect-level');
 const uploadPreview = uploadForm.querySelector('.img-upload__preview');
 

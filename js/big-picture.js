@@ -6,18 +6,9 @@ const bigPictureImg = picturePreviewModal.querySelector('.big-picture__img').que
 const bigPictureLikesCount = picturePreviewModal.querySelector('.likes-count');
 const bigPictureCommentsCount= picturePreviewModal.querySelector('.comments-count');
 const bigPictureDescription= picturePreviewModal.querySelector('.social__caption');
-// const commentCounts = picturePreviewModal.querySelector('.social__comment-count');
 const commentLoader = picturePreviewModal.querySelector('.comments-loader');
 
 const COMMENTS_MAX = 5;
-
-const moreComments = () => {
-  commentLoader.addEventListener('click', (evt) => {
-    evt.preventDefault;
-    evt.target.classList.add('hidden');
-  });
-  return commentLoader;
-};
 
 const renderBigPicture = (picture) => {
   const pictureCard = document.querySelectorAll('.picture');
@@ -26,8 +17,8 @@ const renderBigPicture = (picture) => {
     pictureCard[i].addEventListener('click', (evt) => {
       evt.preventDefault();
       openModal();
-
       socialComments.innerHTML = '';
+
       const {url, likes, comments, description} = picture[i];
       bigPictureImg.src = url;
       bigPictureLikesCount.textContent = likes;
@@ -35,9 +26,8 @@ const renderBigPicture = (picture) => {
       bigPictureDescription.textContent = description;
       const commentFragment = document.createDocumentFragment();
 
-      if(comments.length > COMMENTS_MAX){
-        commentLoader.classList.remove('hidden');
-        for (let j = 0; j < COMMENTS_MAX; j++) {
+      const allComments = (COMMENT_LENGTH) => {
+        for (let j = 0; j < COMMENT_LENGTH; j++) {
           const commentListElement = createElement('li', 'social__comment');
           const commentAvatar = createElement('img', 'social__picture');
           const {avatar, name, message} = comments[j];
@@ -49,37 +39,24 @@ const renderBigPicture = (picture) => {
           commentListElement.appendChild(commentText);
           commentFragment.appendChild(commentListElement);
         }
-        moreComments();
-        for (let j = 5; j < comments.length; j++) {
-          const commentListElement = createElement('li', 'social__comment');
-          const commentAvatar = createElement('img', 'social__picture');
-          const {avatar, name, message} = comments[j];
-          commentAvatar.src = avatar;
-          commentAvatar.alt = name;
-          commentListElement.appendChild(commentAvatar);
-          const commentText = createElement('p', 'social__text');
-          commentText.textContent = message;
-          commentListElement.appendChild(commentText);
-          commentFragment.appendChild(commentListElement);
-        }
-      } else {
-        commentLoader.classList.add('hidden');
-        for (let j = 0; j < comments.length; j++) {
-          const commentListElement = createElement('li', 'social__comment');
-          const commentAvatar = createElement('img', 'social__picture');
-          const {avatar, name, message} = comments[j];
-          commentAvatar.src = avatar;
-          commentAvatar.alt = name;
-          commentListElement.appendChild(commentAvatar);
-          const commentText = createElement('p', 'social__text');
-          commentText.textContent = message;
-          commentListElement.appendChild(commentText);
-          commentFragment.appendChild(commentListElement);
-        }
+        socialComments.appendChild(commentFragment);
+        document.body.classList.add('modal-open');
       }
 
-      socialComments.appendChild(commentFragment);
-      document.body.classList.add('modal-open');
+      commentLoader.addEventListener('click', (evt) => {
+        evt.preventDefault;
+        socialComments.innerHTML = '';
+        allComments(comments.length);
+        commentLoader.classList.add('hidden');
+      });
+
+      if(comments.length > COMMENTS_MAX){
+        commentLoader.classList.remove('hidden');
+        allComments(COMMENTS_MAX);
+      } else if(comments.length < COMMENTS_MAX) {
+        commentLoader.classList.add('hidden');
+        allComments(comments.length);
+      }
     });
   }
 };
