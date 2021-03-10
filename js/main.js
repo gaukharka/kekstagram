@@ -8,7 +8,6 @@ import './user-modal.js';
 import {renderBigPicture} from './big-picture.js';
 import {renderSmallPictures} from './small-pictures.js';
 import {formSubmit} from './send-data.js';
-// import { getData } from './api.js';
 
 fetch('https://22.javascript.pages.academy/kekstagram/data')
   .then((response) => response.json())

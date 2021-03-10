@@ -12,10 +12,6 @@ const renderSuccessMessage = () => {
 
   const successButton = main.querySelector('.success__button');
 
-  main.addEventListener('click', onOutsideClick);
-  successButton.addEventListener('click', closeSuccessMessage);
-  document.addEventListener('keydown', onSuccessEscKeydown);
-
   const onSuccessEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
       evt.preventDefault();
@@ -33,11 +29,15 @@ const renderSuccessMessage = () => {
   };
 
   const closeSuccessMessage = () => {
-    main.remove(element);
+    main.querySelector('.success').remove();
     main.removeEventListener('click', onOutsideClick);
     document.removeEventListener('keydown', onSuccessEscKeydown);
     successButton.removeEventListener('click', onPopupCloseClick);
   };
+
+  main.addEventListener('click', onOutsideClick);
+  successButton.addEventListener('click', closeSuccessMessage);
+  document.addEventListener('keydown', onSuccessEscKeydown);
 };
 
 // ERROR
@@ -46,11 +46,7 @@ const renderErrorMessage = () => {
   const element = template.cloneNode(true);
   main.appendChild(element);
 
-  const errorButton = main.querySelector('.error__button');
-
-  main.addEventListener('click', onOutsideClick);
-  errorButton.addEventListener('click', closeErrorMessage);
-  document.addEventListener('keydown', onErrorEscKeydown);
+  const errorButton = document.querySelector('.error__button');
 
   const onErrorEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
@@ -69,16 +65,21 @@ const renderErrorMessage = () => {
   };
 
   const closeErrorMessage = () => {
-    main.remove(element);
+    main.querySelector('.error').remove();
     main.removeEventListener('click', onOutsideClick);
     document.removeEventListener('keydown', onErrorEscKeydown);
     errorButton.removeEventListener('click', onPopupCloseClick);
   };
+
+  main.addEventListener('click', onOutsideClick);
+  errorButton.addEventListener('click', closeErrorMessage);
+  document.addEventListener('keydown', onErrorEscKeydown);
 };
 
+// SUBMIT
 const formSubmit = (onSuccess) => {
   uploadForm.addEventListener('submit', (evt) => {
-    evt.preventDefault;
+    evt.preventDefault();
 
     const formData = new FormData(evt.target);
 
@@ -90,8 +91,8 @@ const formSubmit = (onSuccess) => {
     )
       .then((response) => {
         if(response.ok) {
-          renderSuccessMessage();
           onSuccess();
+          renderSuccessMessage();
         } else {
           renderErrorMessage();
           closeUploadModal();
