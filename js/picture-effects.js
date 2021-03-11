@@ -142,4 +142,12 @@ effectHeat.addEventListener('click', () => {
   });
 });
 
-export {effectLevel};
+const resetEffect = () => {
+  uploadPreview.classList.add('effects__preview--none');
+  effectLevel.classList.add('hidden');
+  sliderValue.value = '';
+  uploadPreview.style.filter = '';
+  uploadPreview.style.webkitFilter = '';
+}
+
+export {effectLevel, resetEffect};

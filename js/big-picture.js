@@ -10,7 +10,7 @@ const commentLoader = picturePreviewModal.querySelector('.comments-loader');
 
 const COMMENTS_MAX = 5;
 
-const renderBigPicture = (picture) => {
+const openBigPictureModal = (picture) => {
   const pictureCard = document.querySelectorAll('.picture');
 
   for (let i = 0; i < pictureCard.length; i++) {
@@ -26,7 +26,7 @@ const renderBigPicture = (picture) => {
       bigPictureDescription.textContent = description;
       const commentFragment = document.createDocumentFragment();
 
-      const allComments = (COMMENT_LENGTH) => {
+      const getAllComments = (COMMENT_LENGTH) => {
         for (let j = 0; j < COMMENT_LENGTH; j++) {
           const commentListElement = createElement('li', 'social__comment');
           const commentAvatar = createElement('img', 'social__picture');
@@ -44,21 +44,21 @@ const renderBigPicture = (picture) => {
       }
 
       commentLoader.addEventListener('click', (evt) => {
-        evt.preventDefault;
+        evt.preventDefault();
         socialComments.innerHTML = '';
-        allComments(comments.length);
+        getAllComments(comments.length);
         commentLoader.classList.add('hidden');
       });
 
       if(comments.length > COMMENTS_MAX){
         commentLoader.classList.remove('hidden');
-        allComments(COMMENTS_MAX);
+        getAllComments(COMMENTS_MAX);
       } else if(comments.length < COMMENTS_MAX) {
         commentLoader.classList.add('hidden');
-        allComments(comments.length);
+        getAllComments(comments.length);
       }
     });
   }
 };
 
-export {renderBigPicture};
+export {openBigPictureModal};

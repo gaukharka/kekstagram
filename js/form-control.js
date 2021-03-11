@@ -1,5 +1,7 @@
 import {isEscEvent} from './util.js';
 import {hashtagInput, commentInput} from './form-validation.js';
+import {resetScale} from './picture-scale.js';
+import {resetEffect} from './picture-effects.js';
 
 const closeButton = document.querySelector('#upload-cancel');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -30,6 +32,8 @@ const closeUploadModal = () => {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
   closeButton.removeEventListener('click', onPopupCloseClick);
+  resetScale();
+  resetEffect();
 };
 
 hashtagInput.addEventListener('focusin', () => {

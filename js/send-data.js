@@ -19,8 +19,8 @@ const renderSuccessMessage = () => {
     }
   };
 
-  const onOutsideClick = (evt) => {
-    closeSuccessMessage(evt.target.className);
+  const onOutsideClick = () => {
+    closeSuccessMessage();
   };
 
   const onPopupCloseClick = (evt) => {
@@ -55,8 +55,8 @@ const renderErrorMessage = () => {
     }
   };
 
-  const onOutsideClick = (evt) => {
-    closeErrorMessage(evt.target.className);
+  const onOutsideClick = () => {
+    closeErrorMessage();
   };
 
   const onPopupCloseClick = (evt) => {
@@ -83,7 +83,7 @@ const formSubmit = (onSuccess) => {
 
     const formData = new FormData(evt.target);
 
-    fetch('https://22.javascript.pages.academy/kekstagram',
+    fetch('https://22.javascript.pages.academy/404',
       {
         method: 'POST',
         body: formData,
@@ -93,6 +93,7 @@ const formSubmit = (onSuccess) => {
         if(response.ok) {
           onSuccess();
           renderSuccessMessage();
+          uploadForm.reset();
         } else {
           renderErrorMessage();
           closeUploadModal();

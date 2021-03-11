@@ -12,4 +12,5 @@ const renderSmallPictures = (pictures) => {
   });
   allPictures.appendChild(pictureListFragment);
 }
+
 export {renderSmallPictures};

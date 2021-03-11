@@ -32,4 +32,5 @@ const processPhoto= () => {
 
 fileUpload.addEventListener('change', processPhoto);
 
+
 export {imgUploadPreview, fileUpload} ;
