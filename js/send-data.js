@@ -1,7 +1,7 @@
 import {isEscEvent} from './util.js';
 import {closeUploadModal} from './form-control.js';
 
-const uploadForm = document.querySelector('.img-upload__form');
+const uploadForm = document.querySelector('#upload-select-image');
 const main = document.querySelector('main');
 
 // SUCCESS

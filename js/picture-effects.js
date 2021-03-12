@@ -1,6 +1,6 @@
 /* global noUiSlider:readonly */
 
-const uploadForm = document.querySelector('.img-upload__form');
+const uploadForm = document.querySelector('#upload-select-image');
 const effectLevel = uploadForm.querySelector('.img-upload__effect-level');
 const uploadPreview = uploadForm.querySelector('.img-upload__preview');
 

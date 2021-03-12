@@ -1,6 +1,6 @@
 import {openUploadModal} from './form-control.js';
 
-const fileUpload = document.querySelector('.img-upload__input');
+const fileUpload = document.querySelector('#upload-file');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
 
 const imgUploadPreviewImg = imgUploadPreview.querySelector('img');

@@ -14,8 +14,7 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-const onPopupCloseClick = (evt) => {
-  evt.preventDefault();
+const onPopupCloseClick = () => {
   closeUploadModal();
 };
 
@@ -32,11 +31,10 @@ const closeUploadModal = () => {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
   cancelUploadButton.removeEventListener('click', onPopupCloseClick);
+  document.querySelector('#upload-select-image').reset();
   resetScale();
   resetEffect();
 };
-
-cancelUploadButton.addEventListener('click', closeUploadModal);
 
 hashtagInput.addEventListener('focusin', () => {
   document.removeEventListener('keydown', onPopupEscKeydown)

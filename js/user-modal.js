@@ -1,7 +1,7 @@
 import {isEscEvent} from './util.js';
 
 const picturePreviewModal = document.querySelector('.big-picture');
-const closeButton = picturePreviewModal.querySelector('.big-picture__cancel');
+const closeButton = picturePreviewModal.querySelector('#picture-cancel');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
