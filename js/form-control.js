@@ -3,7 +3,7 @@ import {hashtagInput, commentInput} from './form-validation.js';
 import {resetScale} from './picture-scale.js';
 import {resetEffect} from './picture-effects.js';
 
-const closeButton = document.querySelector('#upload-cancel');
+const cancelUploadButton = document.querySelector('#upload-cancel');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
 
@@ -23,7 +23,7 @@ const openUploadModal = () => {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
-  closeButton.addEventListener('click', onPopupCloseClick);
+  cancelUploadButton.addEventListener('click', onPopupCloseClick);
   imgUploadEffectLevel.classList.add('hidden');
 };
 
@@ -31,10 +31,12 @@ const closeUploadModal = () => {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
-  closeButton.removeEventListener('click', onPopupCloseClick);
+  cancelUploadButton.removeEventListener('click', onPopupCloseClick);
   resetScale();
   resetEffect();
 };
+
+cancelUploadButton.addEventListener('click', closeUploadModal);
 
 hashtagInput.addEventListener('focusin', () => {
   document.removeEventListener('keydown', onPopupEscKeydown)

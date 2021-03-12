@@ -83,7 +83,7 @@ const formSubmit = (onSuccess) => {
 
     const formData = new FormData(evt.target);
 
-    fetch('https://22.javascript.pages.academy/404',
+    fetch('https://22.javascript.pages.academy/kekstagram',
       {
         method: 'POST',
         body: formData,
