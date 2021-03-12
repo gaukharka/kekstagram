@@ -1,6 +1,6 @@
 /* global noUiSlider:readonly */
-import {uploadForm} from './picture-upload.js';
 
+const uploadForm = document.querySelector('#upload-select-image');
 const effectLevel = uploadForm.querySelector('.img-upload__effect-level');
 const uploadPreview = uploadForm.querySelector('.img-upload__preview');
 
@@ -142,4 +142,12 @@ effectHeat.addEventListener('click', () => {
   });
 });
 
-export {effectLevel};
+const resetEffect = () => {
+  uploadPreview.classList.add('effects__preview--none');
+  effectLevel.classList.add('hidden');
+  sliderValue.value = '';
+  uploadPreview.style.filter = '';
+  uploadPreview.style.webkitFilter = '';
+}
+
+export {effectLevel, resetEffect};

@@ -46,4 +46,4 @@ commentInput.addEventListener('input', () => {
   commentInput.reportValidity();
 });
 
-export {hashtagInput, commentInput};
+export {hashtagInput, commentInput };
