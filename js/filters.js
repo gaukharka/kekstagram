@@ -10,16 +10,16 @@ const filterButton = document.querySelectorAll('.img-filters__button');
 
 const RERENDER_DELAY = 500;
 
-filterButton.forEach((filterButton) => {
-  filterButton.addEventListener('click', () => {
-    for(let i=0; i < filterButton.length; i++){
-      if(filterButton[i].classList.contains('.img-filters__button--active')){
-        filterButton[i].classList.remove('img-filters__button--active')
-      }
-    }
-    filterButton.classList.add('img-filters__button--active');
-  })
-})
+const handleClick = (evt) => {
+  filterButton.forEach(filterButton => {
+    filterButton.classList.remove('img-filters__button--active')
+  });
+  evt.target.classList.add('img-filters__button--active');
+}
+
+filterButton.forEach(filterButton => {
+  filterButton.addEventListener('click', handleClick);
+});
 
 const cleanUpPreviousData = () => {
   const smallPhotos = document.querySelectorAll('.picture');
