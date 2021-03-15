@@ -3,7 +3,7 @@ import {openBigPictureModal} from './big-picture.js';
 import {renderSmallPictures} from './small-pictures.js';
 import {formSubmit} from './send-data.js';
 
-const filter = document.querySelector('.img-filters');
+const filtersContainer = document.querySelector('.img-filters');
 
 const getData = () => {
   fetch('https://22.javascript.pages.academy/kekstagram/data')
@@ -11,7 +11,7 @@ const getData = () => {
     .then((data) => {
       renderSmallPictures(data);
       openBigPictureModal(data);
-      filter.classList.remove('img-filters--inactive');
+      filtersContainer.classList.remove('img-filters--inactive');
     });
 }
 

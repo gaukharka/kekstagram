@@ -7,14 +7,16 @@ const defaultFilter = document.querySelector('#filter-default');
 const randomFilter = document.querySelector('#filter-random');
 const discussedFilter = document.querySelector('#filter-discussed');
 const filterButton = document.querySelectorAll('.img-filters__button');
+const ACTIVE_FILTER_CLASS = 'img-filters__button--active'
 
 const RERENDER_DELAY = 500;
 
 const handleClick = (evt) => {
-  filterButton.forEach(filterButton => {
-    filterButton.classList.remove('img-filters__button--active')
-  });
-  evt.target.classList.add('img-filters__button--active');
+  const currentActiveFilter = document.querySelector(`.${ACTIVE_FILTER_CLASS}`);
+  if (currentActiveFilter) {
+    currentActiveFilter.classList.remove(ACTIVE_FILTER_CLASS);
+  }
+  evt.target.classList.add(ACTIVE_FILTER_CLASS);
 }
 
 filterButton.forEach(filterButton => {
@@ -51,7 +53,7 @@ randomFilter.addEventListener('click', _.debounce(() => {
 
 //POPULAR
 
-const getCommentRank = (pictureA, pictureB) => {
+const sortByMostCommented = (pictureA, pictureB) => {
   const commentA = pictureA.comments.length;
   const commentB = pictureB.comments.length;
   return commentB - commentA;
@@ -62,7 +64,7 @@ discussedFilter.addEventListener('click', _.debounce(() => {
   fetch('https://22.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
     .then((data) => {
-      renderSmallPictures(data.slice().sort(getCommentRank));
-      openBigPictureModal(data.slice().sort(getCommentRank));
+      renderSmallPictures(data.slice().sort(sortByMostCommented));
+      openBigPictureModal(data.slice().sort(sortByMostCommented));
     });
 }, RERENDER_DELAY));
