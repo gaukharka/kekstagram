@@ -1,5 +1,5 @@
 import {isEscEvent} from './util.js';
-import {closeUploadModal} from './form-control.js';
+import {closeForm} from './modal-control.js';
 
 const uploadForm = document.querySelector('#upload-select-image');
 const main = document.querySelector('main');
@@ -96,12 +96,12 @@ const formSubmit = (onSuccess) => {
           uploadForm.reset();
         } else {
           renderErrorMessage();
-          closeUploadModal();
+          closeForm();
         }
       })
       .catch(() => {
         renderErrorMessage();
-        closeUploadModal();
+        closeForm();
       })
   });
 };

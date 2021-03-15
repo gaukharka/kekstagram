@@ -1,4 +1,4 @@
-import {picturePreviewModal, openModal} from './user-modal.js';
+import {picturePreviewModal, openModal} from './modal-control.js';
 import {createElement} from './util.js';
 
 const socialComments = document.querySelector('.social__comments');
@@ -26,8 +26,8 @@ const openBigPictureModal = (picture) => {
       bigPictureDescription.textContent = description;
       const commentFragment = document.createDocumentFragment();
 
-      const getAllComments = (COMMENT_LENGTH) => {
-        for (let j = 0; j < COMMENT_LENGTH; j++) {
+      const getAllComments = (commentLength) => {
+        for (let j = 0; j < commentLength; j++) {
           const commentListElement = createElement('li', 'social__comment');
           const commentAvatar = createElement('img', 'social__picture');
           const {avatar, name, message} = comments[j];
@@ -43,11 +43,32 @@ const openBigPictureModal = (picture) => {
         document.body.classList.add('modal-open');
       }
 
-      commentLoader.addEventListener('click', (evt) => {
+      // const comm = () => {
+      //   if(comments.length > COMMENTS_MAX){
+      //     for(let i = 5; i < comments.length; i+=5){
+      //       socialComments.innerHTML = '';
+      //       getAllComments([i]);
+      //     }
+      //   } else {
+      //     socialComments.innerHTML = '';
+      //     getAllComments(comments.length);
+      //   }
+      // }
+
+      const comm = () => {
+        if(comments.length > COMMENTS_MAX){
+          for(let i = 0; i < comments.length; i+=COMMENTS_MAX){
+            socialComments.innerHTML = '';
+            getAllComments([i]);
+          }
+        }
+      }
+
+      // nado zagrujat commentariya po 5
+
+      commentLoader.addEventListener('click', () => {
         evt.preventDefault();
-        socialComments.innerHTML = '';
-        getAllComments(comments.length);
-        commentLoader.classList.add('hidden');
+        comm();
       });
 
       if(comments.length > COMMENTS_MAX){

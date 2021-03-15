@@ -1,11 +1,11 @@
 import './picture-upload.js';
+import './big-picture.js';
+import './small-pictures.js';
 import './picture-effects.js';
 import './form-validation.js';
 import './picture-scale.js';
-import './big-picture.js';
-import './user-modal.js';
-import './form-control.js';
-import './small-pictures.js';
-import './send-data.js';
-import './get-data.js';
 import './filters.js';
+import './modal-control.js';
+import './get-data.js';
+import './send-data.js';
+import './util.js';

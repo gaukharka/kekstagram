@@ -31,10 +31,13 @@ const cleanUpPreviousData = () => {
 };
 
 //DEFAULT
-defaultFilter.addEventListener('click', () => {
+defaultFilter.addEventListener('click', _.debounce(() => {
   cleanUpPreviousData();
-  getData();
-});
+  getData((data) => {
+    renderSmallPictures(data);
+    openBigPictureModal(data);
+  });
+}, RERENDER_DELAY));
 
 //RANDOM
 const getRandomPhotos = (pictures) => {
@@ -43,16 +46,13 @@ const getRandomPhotos = (pictures) => {
 
 randomFilter.addEventListener('click', _.debounce(() => {
   cleanUpPreviousData();
-  fetch('https://22.javascript.pages.academy/kekstagram/data')
-    .then((response) => response.json())
-    .then((data) => {
-      renderSmallPictures(getRandomPhotos(data).slice(0, 10));
-      openBigPictureModal(data);
-    });
+  getData((data) => {
+    renderSmallPictures(getRandomPhotos(data).slice(0, 10));
+    openBigPictureModal(data);
+  })
 }, RERENDER_DELAY));
 
 //POPULAR
-
 const sortByMostCommented = (pictureA, pictureB) => {
   const commentA = pictureA.comments.length;
   const commentB = pictureB.comments.length;
@@ -61,10 +61,8 @@ const sortByMostCommented = (pictureA, pictureB) => {
 
 discussedFilter.addEventListener('click', _.debounce(() => {
   cleanUpPreviousData();
-  fetch('https://22.javascript.pages.academy/kekstagram/data')
-    .then((response) => response.json())
-    .then((data) => {
-      renderSmallPictures(data.slice().sort(sortByMostCommented));
-      openBigPictureModal(data.slice().sort(sortByMostCommented));
-    });
+  getData((data) => {
+    renderSmallPictures(data.slice().sort(sortByMostCommented));
+    openBigPictureModal(data.slice().sort(sortByMostCommented));
+  })
 }, RERENDER_DELAY));
