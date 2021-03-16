@@ -43,38 +43,11 @@ const openBigPictureModal = (picture) => {
         document.body.classList.add('modal-open');
       }
 
-      // const comm = () => {
-      //   if(comments.length > COMMENTS_MAX){
-      //     for(let i = 5; i < comments.length; i+=5){
-      //       socialComments.innerHTML = '';
-      //       getAllComments([i]);
-      //     }
-      //   } else {
-      //     socialComments.innerHTML = '';
-      //     getAllComments(comments.length);
-      //   }
-      // }
-
-      const comm = () => {
-        if(comments.length > COMMENTS_MAX){
-          for(let i = 0; i < comments.length; i+=COMMENTS_MAX){
-            socialComments.innerHTML = '';
-            getAllComments([i]);
-          }
-        }
-      }
-
-      // nado zagrujat commentariya po 5
-
-      commentLoader.addEventListener('click', () => {
-        evt.preventDefault();
-        comm();
-      });
-
-      if(comments.length > COMMENTS_MAX){
+      if(comments.length > COMMENTS_MAX) {
+        socialComments.innerHTML = '';
         commentLoader.classList.remove('hidden');
-        getAllComments(COMMENTS_MAX);
-      } else if(comments.length < COMMENTS_MAX) {
+
+      } else {
         commentLoader.classList.add('hidden');
         getAllComments(comments.length);
       }
