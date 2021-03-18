@@ -17,7 +17,7 @@ const handleClick = (evt) => {
     currentActiveFilter.classList.remove(ACTIVE_FILTER_CLASS);
   }
   evt.target.classList.add(ACTIVE_FILTER_CLASS);
-}
+};
 
 filterButton.forEach(filterButton => {
   filterButton.addEventListener('click', handleClick);
@@ -42,7 +42,7 @@ defaultFilter.addEventListener('click', _.debounce(() => {
 //RANDOM
 const getRandomPhotos = (pictures) => {
   return pictures.sort(() => Math.random() - 0.5);
-}
+};
 
 randomFilter.addEventListener('click', _.debounce(() => {
   cleanUpPreviousData();
@@ -57,7 +57,7 @@ const sortByMostCommented = (pictureA, pictureB) => {
   const commentA = pictureA.comments.length;
   const commentB = pictureB.comments.length;
   return commentB - commentA;
-}
+};
 
 discussedFilter.addEventListener('click', _.debounce(() => {
   cleanUpPreviousData();

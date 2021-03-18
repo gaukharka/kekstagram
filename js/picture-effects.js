@@ -18,7 +18,7 @@ const showSlider = () => {
   if (effectLevel.classList.contains('hidden')) {
     effectLevel.classList.remove('hidden');
   }
-}
+};
 
 noUiSlider.create(sliderElement, {
   range: {
@@ -148,6 +148,6 @@ const resetEffect = () => {
   sliderValue.value = '';
   uploadPreview.style.filter = '';
   uploadPreview.style.webkitFilter = '';
-}
+};
 
 export {effectLevel, resetEffect};

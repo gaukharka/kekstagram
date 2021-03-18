@@ -20,7 +20,7 @@ const onPopupEscKeydown = (evt) => {
 const onPopupCloseClick = (evt) => {
   evt.preventDefault();
   closeModal();
-}
+};
 
 const openModal = () => {
   picturePreviewModal.classList.remove('hidden');
