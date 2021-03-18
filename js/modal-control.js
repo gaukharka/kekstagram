@@ -82,5 +82,4 @@ commentInput.addEventListener('focusout', () => {
   document.addEventListener('keydown', onFormEscKeydown)
 });
 
-
 export {openModal, closeModal, openForm, closeForm, picturePreviewModal};
