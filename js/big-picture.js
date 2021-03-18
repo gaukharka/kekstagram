@@ -43,16 +43,55 @@ const openBigPictureModal = (picture) => {
         document.body.classList.add('modal-open');
       }
 
-      if(comments.length > COMMENTS_MAX) {
-        socialComments.innerHTML = '';
-        commentLoader.classList.remove('hidden');
-
-      } else {
+      if(comments.length < COMMENTS_MAX) {
         commentLoader.classList.add('hidden');
         getAllComments(comments.length);
+      } else if (comments.length > COMMENTS_MAX && comments.length < 2*COMMENTS_MAX) {
+        getAllComments(COMMENTS_MAX);
+        commentLoader.classList.remove('hidden');
+        commentLoader.addEventListener('click', () => {
+          socialComments.innerHTML = '';
+          getAllComments(comments.length);
+          commentLoader.classList.add('hidden');
+        })
+      } else  {
+        socialComments.innerHTML = '';
+        getAllComments(COMMENTS_MAX);
+        commentLoader.classList.remove('hidden');
+        const n = comments.length % COMMENTS_MAX
+        commentLoader.addEventListener('click', () => {
+          socialComments.innerHTML = '';
+          let i = COMMENTS_MAX;
+          i += COMMENTS_MAX;
+          getAllComments([i])
+          console.log(comments);
+          console.log(i + COMMENTS_MAX);
+
+          if(comments.length % COMMENTS_MAX !== 0){
+            socialComments.innerHTML = '';
+            getAllComments(i);
+            commentLoader.addEventListener('click', () => {
+              socialComments.innerHTML = '';
+              getAllComments(comments.length);
+              commentLoader.classList.add('hidden');
+            })
+          }
+        });
+        commentLoader.classList.remove('hidden');
       }
     });
   }
 };
 
 export {openBigPictureModal};
+
+
+// if(comments.length % COMMENTS_MAX !== 0){
+//   socialComments.innerHTML = '';
+//   getAllComments(i);
+//   commentLoader.addEventListener('click', () => {
+//     socialComments.innerHTML = '';
+//     getAllComments(comments.length);
+//     commentLoader.classList.add('hidden');
+//   })
+// }

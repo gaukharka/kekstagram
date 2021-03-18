@@ -60,6 +60,7 @@ const closeForm = () => {
   document.removeEventListener('keydown', onFormEscKeydown);
   cancelUploadButton.removeEventListener('click', onFormCloseClick);
   document.querySelector('#upload-select-image').reset();
+  document.querySelector('.social__comments').innerHTML.reset();
   resetScale();
   resetEffect();
 };
