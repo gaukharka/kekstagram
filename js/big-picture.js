@@ -1,4 +1,4 @@
-import {picturePreviewModal, openModal} from './user-modal.js';
+import {picturePreviewModal, openModal} from './modal-control.js';
 import {createElement} from './util.js';
 
 const socialComments = document.querySelector('.social__comments');
@@ -6,9 +6,10 @@ const bigPictureImg = picturePreviewModal.querySelector('.big-picture__img').que
 const bigPictureLikesCount = picturePreviewModal.querySelector('.likes-count');
 const bigPictureCommentsCount= picturePreviewModal.querySelector('.comments-count');
 const bigPictureDescription= picturePreviewModal.querySelector('.social__caption');
-const commentLoader = picturePreviewModal.querySelector('.comments-loader');
+const commentsLoader = picturePreviewModal.querySelector('.comments-loader');
 
-const COMMENTS_MAX = 5;
+const COMMENTS_INITIAL_SHOW = 5;
+const COMMENTS_INCREMENT_STEP = 5;
 
 const openBigPictureModal = (picture) => {
   const pictureCard = document.querySelectorAll('.picture');
@@ -17,7 +18,8 @@ const openBigPictureModal = (picture) => {
     pictureCard[i].addEventListener('click', (evt) => {
       evt.preventDefault();
       openModal();
-      socialComments.innerHTML = '';
+      commentsLoader.classList.remove('hidden');
+      let displayedComments = COMMENTS_INITIAL_SHOW;
 
       const {url, likes, comments, description} = picture[i];
       bigPictureImg.src = url;
@@ -26,11 +28,22 @@ const openBigPictureModal = (picture) => {
       bigPictureDescription.textContent = description;
       const commentFragment = document.createDocumentFragment();
 
-      const getAllComments = (COMMENT_LENGTH) => {
-        for (let j = 0; j < COMMENT_LENGTH; j++) {
+      const onLoadMoreClick = () => {
+        displayedComments += COMMENTS_INCREMENT_STEP;
+        displayComments();
+      }
+
+      const displayComments = () => {
+        socialComments.innerHTML = '';
+        if (comments.length < displayedComments) {
+          commentsLoader.classList.add('hidden');
+          commentsLoader.removeEventListener('click', onLoadMoreClick);
+        }
+
+        comments.slice(0, displayedComments).forEach(comment => {
           const commentListElement = createElement('li', 'social__comment');
           const commentAvatar = createElement('img', 'social__picture');
-          const {avatar, name, message} = comments[j];
+          const {avatar, name, message} = comment;
           commentAvatar.src = avatar;
           commentAvatar.alt = name;
           commentListElement.appendChild(commentAvatar);
@@ -38,24 +51,16 @@ const openBigPictureModal = (picture) => {
           commentText.textContent = message;
           commentListElement.appendChild(commentText);
           commentFragment.appendChild(commentListElement);
-        }
+        });
+
         socialComments.appendChild(commentFragment);
         document.body.classList.add('modal-open');
       }
 
-      commentLoader.addEventListener('click', (evt) => {
-        evt.preventDefault();
-        socialComments.innerHTML = '';
-        getAllComments(comments.length);
-        commentLoader.classList.add('hidden');
-      });
+      displayComments();
 
-      if(comments.length > COMMENTS_MAX){
-        commentLoader.classList.remove('hidden');
-        getAllComments(COMMENTS_MAX);
-      } else if(comments.length < COMMENTS_MAX) {
-        commentLoader.classList.add('hidden');
-        getAllComments(comments.length);
+      if (comments.length > COMMENTS_INITIAL_SHOW) {
+        commentsLoader.addEventListener('click', onLoadMoreClick);
       }
     });
   }

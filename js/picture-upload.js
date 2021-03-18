@@ -1,4 +1,4 @@
-import {openUploadModal} from './form-control.js';
+import {openForm} from './modal-control.js';
 
 const fileUpload = document.querySelector('#upload-file');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
@@ -27,10 +27,9 @@ const filePreview = () => {
 
 const processPhoto= () => {
   filePreview();
-  openUploadModal();
+  openForm();
 }
 
 fileUpload.addEventListener('change', processPhoto);
-
 
 export {imgUploadPreview, fileUpload} ;
