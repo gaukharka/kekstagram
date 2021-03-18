@@ -28,7 +28,7 @@ const filePreview = () => {
 const processPhoto= () => {
   filePreview();
   openForm();
-}
+};
 
 fileUpload.addEventListener('change', processPhoto);
 

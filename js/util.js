@@ -6,7 +6,7 @@ const getRandomNumber = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   throw new Error('Значение ' + min + ' не может быть больше, чем значение ' + max + '!')
-}
+};
 
 const isStringTooLong = function(stringToCheck, maxLength) {
   const stringToCheckLength = stringToCheck.length;
@@ -33,4 +33,3 @@ const createElement = (tagName, className) => {
 };
 
 export {getRandomNumber, isStringTooLong, getRandomElement, isEscEvent, isEnterEvent, createElement};
-

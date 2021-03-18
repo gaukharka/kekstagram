@@ -11,6 +11,6 @@ const renderSmallPictures = (pictures) => {
     pictureListFragment.appendChild(pictureElement);
   });
   allPictures.appendChild(pictureListFragment);
-}
+};
 
 export {renderSmallPictures};

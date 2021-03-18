@@ -11,7 +11,7 @@ const getData = (onSuccess) => {
     .then((data) => {
       onSuccess(data)
     });
-}
+};
 
 getData((data) => {
   renderSmallPictures(data);

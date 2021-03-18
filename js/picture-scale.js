@@ -29,5 +29,6 @@ maximizeButton.addEventListener('click', maximizeImg);
 const resetScale = () => {
   uploadedImg.style.transform = 'scale(' + 1 + ')';
   scaleControl.value = 100 + '%';
-}
+};
+
 export {resetScale};
