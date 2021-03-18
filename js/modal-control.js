@@ -30,6 +30,7 @@ const openModal = () => {
 
 const closeModal = () => {
   picturePreviewModal.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
   closeButton.removeEventListener('click', onPopupCloseClick);
 };
