@@ -150,4 +150,4 @@ const resetEffect = () => {
   uploadPreview.style.webkitFilter = '';
 };
 
-export {effectLevel, resetEffect};
+export {resetEffect};
