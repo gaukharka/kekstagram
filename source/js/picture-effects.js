@@ -14,6 +14,36 @@ const effectHeat = uploadForm.querySelector('#effect-heat');
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderValue = document.querySelector('.effect-level__value');
 
+const effectsContainer = [
+  'effects__preview--none',
+  'effects__preview--chrome',
+  'effects__preview--sepia',
+  'effects__preview--marvin',
+  'effects__preview--phobos',
+  'effects__preview--heat',
+];
+
+const addEffectOnClick = (effect) => {
+  for(let i = 0; i < effectsContainer.length; i++){
+    uploadPreview.classList.remove(effectsContainer[i])
+  }
+
+  switch (effect) {
+    case 'effects__preview--none':
+      return uploadPreview.classList.add(effectsContainer[0]);
+    case 'effects__preview--chrome':
+      return  uploadPreview.classList.add(effectsContainer[1]);
+    case 'effects__preview--sepia':
+      return uploadPreview.classList.add(effectsContainer[2]);
+    case 'effects__preview--marvin':
+      return uploadPreview.classList.add(effectsContainer[3]);
+    case 'effects__preview--phobos':
+      return uploadPreview.classList.add(effectsContainer[4]);
+    default:
+      return uploadPreview.classList.add(effectsContainer[5]);
+  }
+}
+
 const showSlider = () => {
   if (effectLevel.classList.contains('hidden')) {
     effectLevel.classList.remove('hidden');
@@ -31,7 +61,7 @@ noUiSlider.create(sliderElement, {
 
 // ORIGINAL
 effectOriginal.addEventListener('change', () => {
-  uploadPreview.classList.add('effects__preview--none');
+  addEffectOnClick(effectsContainer[0]);
   effectLevel.classList.add('hidden');
   sliderElement.noUiSlider.reset();
   sliderValue.value = '';
@@ -39,6 +69,7 @@ effectOriginal.addEventListener('change', () => {
 
 // CHROME
 effectChrome.addEventListener('click', () => {
+  addEffectOnClick(effectsContainer[1]);
   showSlider();
 
   sliderElement.noUiSlider.updateOptions({
@@ -54,12 +85,13 @@ effectChrome.addEventListener('click', () => {
     sliderValue.value = values[handle];
     const filterValue = (`grayscale(${sliderValue.value})`);
     uploadPreview.style.filter = filterValue;
-    uploadPreview.style.webkitFilter = filterValue;
+    uploadPreview.setAttribute('style',`-webkit-filter:${filterValue}`);
   });
 });
 
 // SEPIA
 effectSepia.addEventListener('click', () => {
+  addEffectOnClick(effectsContainer[2]);
   showSlider();
 
   sliderElement.noUiSlider.updateOptions({
@@ -75,12 +107,13 @@ effectSepia.addEventListener('click', () => {
     sliderValue.value = values[handle];
     const filterValue = (`sepia(${sliderValue.value})`);
     uploadPreview.style.filter = filterValue;
-    uploadPreview.style.webkitFilter = filterValue;
+    uploadPreview.setAttribute('style',`-webkit-filter:${filterValue}`);
   });
 });
 
 // MARVIN
 effectMarvin.addEventListener('click', () => {
+  addEffectOnClick(effectsContainer[3]);
   showSlider();
 
   sliderElement.noUiSlider.updateOptions({
@@ -96,12 +129,13 @@ effectMarvin.addEventListener('click', () => {
     sliderValue.value = values[handle];
     const filterValue = (`invert(${sliderValue.value}%)`);
     uploadPreview.style.filter = filterValue;
-    uploadPreview.style.webkitFilter = filterValue;
+    uploadPreview.setAttribute('style',`-webkit-filter:${filterValue}`);
   });
 });
 
 // PHOBOS
 effectPhobos.addEventListener('click', () => {
+  addEffectOnClick(effectsContainer[4]);
   showSlider();
 
   sliderElement.noUiSlider.updateOptions({
@@ -117,12 +151,13 @@ effectPhobos.addEventListener('click', () => {
     sliderValue.value = values[handle];
     const filterValue = (`blur(${sliderValue.value}px)`);
     uploadPreview.style.filter = filterValue;
-    uploadPreview.style.webkitFilter = filterValue;
+    uploadPreview.setAttribute('style',`-webkit-filter:${filterValue}`);
   });
 });
 
 // HEAT
 effectHeat.addEventListener('click', () => {
+  addEffectOnClick(effectsContainer[5]);
   showSlider();
 
   sliderElement.noUiSlider.updateOptions({
@@ -138,7 +173,7 @@ effectHeat.addEventListener('click', () => {
     sliderValue.value = values[handle];
     const filterValue = (`brightness(${sliderValue.value})`);
     uploadPreview.style.filter = filterValue;
-    uploadPreview.style.webkitFilter = filterValue;
+    uploadPreview.setAttribute('style',`-webkit-filter:${filterValue}`);
   });
 });
 
