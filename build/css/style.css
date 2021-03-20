@@ -694,6 +694,8 @@ main {
   color: #000000;
 
   border-radius: 5px;
+
+  outline: none;
 }
 
 .text__description {
@@ -708,8 +710,13 @@ main {
   color: #000000;
 
   border-radius: 5px;
+
+  outline: none;
 }
 
+.error-validation {
+  border: 2px solid #ff0000;
+}
 
 /**
  * Кнопка для отправки изображения

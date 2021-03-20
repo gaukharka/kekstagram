@@ -66,19 +66,20 @@ const closeForm = () => {
 };
 
 hashtagInput.addEventListener('focusin', () => {
-  document.removeEventListener('keydown', onFormEscKeydown)
+  document.removeEventListener('keydown', onFormEscKeydown);
 });
 
 commentInput.addEventListener('focusin', () => {
-  document.removeEventListener('keydown', onFormEscKeydown)
+  document.removeEventListener('keydown', onFormEscKeydown);
 });
 
 hashtagInput.addEventListener('focusout', () => {
-  document.addEventListener('keydown', onFormEscKeydown)
+  document.addEventListener('keydown', onFormEscKeydown);
+  document.querySelector('.text__hashtags').classList.remove('error-validation');
 });
 
 commentInput.addEventListener('focusout', () => {
-  document.addEventListener('keydown', onFormEscKeydown)
+  document.addEventListener('keydown', onFormEscKeydown);
 });
 
 export {openModal, closeModal, openForm, closeForm, picturePreviewModal};
