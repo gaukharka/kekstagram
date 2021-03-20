@@ -1228,6 +1228,18 @@ main {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.error-display {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid red;
+  padding: 40px;
+  font-size: 30px;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .error__inner,
 .success__inner {
   position: relative;
