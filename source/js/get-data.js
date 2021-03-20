@@ -1,7 +1,7 @@
 import {closeForm} from './modal-control.js';
 import {openBigPictureModal} from './big-picture.js';
 import {renderSmallPictures} from './small-pictures.js';
-import {formSubmit} from './send-data.js';
+import {submitForm} from './send-data.js';
 
 const filtersContainer = document.querySelector('.img-filters');
 
@@ -19,5 +19,5 @@ getData((data) => {
   filtersContainer.classList.remove('img-filters--inactive');
 });
 
-formSubmit(closeForm);
+submitForm(closeForm);
 export {getData};

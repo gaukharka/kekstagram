@@ -77,7 +77,7 @@ const renderErrorMessage = () => {
 };
 
 // SUBMIT
-const formSubmit = (onSuccess) => {
+const submitForm = (onSuccess) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -106,4 +106,4 @@ const formSubmit = (onSuccess) => {
   });
 };
 
-export {formSubmit};
+export {submitForm};
