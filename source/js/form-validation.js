@@ -19,9 +19,9 @@ hashtagInput.addEventListener('input', (evt) => {
   const uniqueHashtags = new Set(hashtags);
 
   for(let i=0; i < hashtags.length; i++){
-    if(input.value === 0) {
-      input.setCustomValidity('');
+    if(input.value === '') {
       input.classList.remove('error-validation');
+      input.setCustomValidity('');
     } else if(hashtags[i].charAt(0) !== '#'){
       input.classList.add('error-validation');
       input.setCustomValidity('Хэштег должен начинаться с символа #');
