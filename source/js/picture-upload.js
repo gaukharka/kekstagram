@@ -7,7 +7,7 @@ const imgUploadPreviewImg = imgUploadPreview.querySelector('img');
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-const filePreview = () => {
+const previewFile = () => {
   const file = fileUpload.files[0];
   const fileName = file.name.toLowerCase();
 
@@ -26,7 +26,7 @@ const filePreview = () => {
 };
 
 const processPhoto= () => {
-  filePreview();
+  previewFile();
   openForm();
 };
 
