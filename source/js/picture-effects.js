@@ -25,7 +25,7 @@ const effectsContainer = [
 
 const addEffectOnClick = (effect) => {
   for(let i = 0; i < effectsContainer.length; i++){
-    uploadPreview.classList.remove(effectsContainer[i])
+    uploadPreview.classList.remove(effectsContainer[i]);
   }
 
   switch (effect) {
@@ -178,7 +178,7 @@ effectHeat.addEventListener('click', () => {
 });
 
 const resetEffect = () => {
-  uploadPreview.classList.add('effects__preview--none');
+  addEffectOnClick(effectsContainer[0]);
   effectLevel.classList.add('hidden');
   sliderValue.value = '';
   uploadPreview.style.filter = '';

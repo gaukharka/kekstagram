@@ -7,6 +7,7 @@ const bigPictureLikesCount = picturePreviewModal.querySelector('.likes-count');
 const bigPictureCommentsCount= picturePreviewModal.querySelector('.comments-count');
 const bigPictureDescription= picturePreviewModal.querySelector('.social__caption');
 const commentsLoader = picturePreviewModal.querySelector('.comments-loader');
+const socialCommentCount = picturePreviewModal.querySelector('.comments-display');
 
 const COMMENTS_INITIAL_SHOW = 5;
 const COMMENTS_INCREMENT_STEP = 5;
@@ -25,11 +26,13 @@ const openBigPictureModal = (picture) => {
       bigPictureImg.src = url;
       bigPictureLikesCount.textContent = likes;
       bigPictureCommentsCount.textContent = comments.length;
+      socialCommentCount.textContent = COMMENTS_INITIAL_SHOW;
       bigPictureDescription.textContent = description;
       const commentFragment = document.createDocumentFragment();
 
       const onLoadMoreClick = () => {
         displayedComments += COMMENTS_INCREMENT_STEP;
+        socialCommentCount.textContent = displayedComments;
         displayComments();
       }
 
@@ -38,6 +41,7 @@ const openBigPictureModal = (picture) => {
         if (comments.length < displayedComments) {
           commentsLoader.classList.add('hidden');
           commentsLoader.removeEventListener('click', onLoadMoreClick);
+          socialCommentCount.textContent = comments.length;
         }
 
         comments.slice(0, displayedComments).forEach(comment => {

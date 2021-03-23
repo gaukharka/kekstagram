@@ -11,7 +11,7 @@ const ACTIVE_FILTER_CLASS = 'img-filters__button--active'
 
 const RERENDER_DELAY = 500;
 
-const handleClick = (evt) => {
+const filterClickHandler = (evt) => {
   const currentActiveFilter = document.querySelector(`.${ACTIVE_FILTER_CLASS}`);
   if (currentActiveFilter) {
     currentActiveFilter.classList.remove(ACTIVE_FILTER_CLASS);
@@ -20,7 +20,7 @@ const handleClick = (evt) => {
 };
 
 filterButton.forEach(filterButton => {
-  filterButton.addEventListener('click', handleClick);
+  filterButton.addEventListener('click', filterClickHandler);
 });
 
 const cleanUpPreviousData = () => {

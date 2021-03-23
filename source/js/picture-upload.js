@@ -25,11 +25,11 @@ const previewFile = () => {
   }
 };
 
-const processPhoto= () => {
+const photoProcessHandler= () => {
   previewFile();
   openForm();
 };
 
-fileUpload.addEventListener('change', processPhoto);
+fileUpload.addEventListener('change', photoProcessHandler);
 
 export {imgUploadPreview, fileUpload} ;

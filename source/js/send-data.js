@@ -15,20 +15,20 @@ const renderSuccessMessage = () => {
   const onSuccessEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
       evt.preventDefault();
-      closeSuccessMessage();
+      onCloseSuccessMessage();
     }
   };
 
   const onOutsideClick = () => {
-    closeSuccessMessage();
+    onCloseSuccessMessage();
   };
 
   const onPopupCloseClick = (evt) => {
     evt.preventDefault();
-    closeSuccessMessage();
+    onCloseSuccessMessage();
   };
 
-  const closeSuccessMessage = () => {
+  const onCloseSuccessMessage = () => {
     main.querySelector('.success').remove();
     main.removeEventListener('click', onOutsideClick);
     document.removeEventListener('keydown', onSuccessEscKeydown);
@@ -36,7 +36,7 @@ const renderSuccessMessage = () => {
   };
 
   main.addEventListener('click', onOutsideClick);
-  successButton.addEventListener('click', closeSuccessMessage);
+  successButton.addEventListener('click', onCloseSuccessMessage);
   document.addEventListener('keydown', onSuccessEscKeydown);
 };
 
@@ -51,20 +51,20 @@ const renderErrorMessage = () => {
   const onErrorEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
       evt.preventDefault();
-      closeErrorMessage();
+      onCloseErrorMessage();
     }
   };
 
   const onOutsideClick = () => {
-    closeErrorMessage();
+    onCloseErrorMessage();
   };
 
   const onPopupCloseClick = (evt) => {
     evt.preventDefault();
-    closeErrorMessage();
+    onCloseErrorMessage();
   };
 
-  const closeErrorMessage = () => {
+  const onCloseErrorMessage = () => {
     main.querySelector('.error').remove();
     main.removeEventListener('click', onOutsideClick);
     document.removeEventListener('keydown', onErrorEscKeydown);
@@ -72,7 +72,7 @@ const renderErrorMessage = () => {
   };
 
   main.addEventListener('click', onOutsideClick);
-  errorButton.addEventListener('click', closeErrorMessage);
+  errorButton.addEventListener('click', onCloseErrorMessage);
   document.addEventListener('keydown', onErrorEscKeydown);
 };
 
